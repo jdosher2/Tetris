@@ -17,7 +17,24 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    int lower_key = tolower(key);
+    
+    if (lower_key == 'p' || key == OF_KEY_ESC) {
+        // pause
+        
+    } else if (lower_key == 'w' || key == OF_KEY_UP) {
+        // rotate
+        
+    } else if (lower_key == 'a' || key == OF_KEY_LEFT) {
+        // move left
+        
+    } else if (lower_key == 'd' || key == OF_KEY_RIGHT) {
+        // move right
+        
+    } else if (lower_key == 's' || key == OF_KEY_DOWN) {
+        // fall faster
+        
+    }
 }
 
 //--------------------------------------------------------------

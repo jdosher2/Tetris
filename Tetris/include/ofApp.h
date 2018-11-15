@@ -6,7 +6,8 @@ class ofApp : public ofBaseApp{
 
     enum GameState {
         IN_PROGRESS,
-        PAUSED
+        PAUSED,
+        FINISHED
     };
     
 	public:
