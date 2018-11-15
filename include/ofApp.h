@@ -1,13 +1,24 @@
-//
-//  ofApp.h
-//  Tetris
-//
-//  Created by Julie Dosher on 11/12/18.
-//
+#pragma once
 
-#ifndef ofApp_h
-#define ofApp_h
+#include "ofMain.h"
 
-#include <stdio.h>
+class ofApp : public ofBaseApp{
 
-#endif /* ofApp_h */
+	public:
+		void setup();
+		void update();
+		void draw();
+
+		void keyPressed(int key);
+		void keyReleased(int key);
+		void mouseMoved(int x, int y );
+		void mouseDragged(int x, int y, int button);
+		void mousePressed(int x, int y, int button);
+		void mouseReleased(int x, int y, int button);
+		void mouseEntered(int x, int y);
+		void mouseExited(int x, int y);
+		void windowResized(int w, int h);
+		void dragEvent(ofDragInfo dragInfo);
+		void gotMessage(ofMessage msg);
+		
+};
