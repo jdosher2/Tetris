@@ -1,23 +1,13 @@
-//
-//  main.cpp
-//  Tetris
-//
-//  Created by Julie Dosher on 11/9/18.
-//  Copyright © 2018 Julie Dosher. All rights reserved.
-//
+#include "ofMain.h"
+#include "ofApp.h"
 
-#define CATCH_CONFIG_RUNNER
-#define TEST false
+//========================================================================
+int main( ){
+	ofSetupOpenGL(1024,768,OF_WINDOW);			// <-------- setup the GL context
 
-#include "catch.hpp"
+	// this kicks off the running of my app
+	// can be OF_WINDOW or OF_FULLSCREEN
+	// pass in width and height too:
+	ofRunApp(new ofApp());
 
-
-
-int main(int argc, const char * argv[]) {
-    if (TEST) {
-        return Catch::Session().run();
-        
-    } else {
-        
-    }
 }
