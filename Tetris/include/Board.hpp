@@ -10,4 +10,20 @@
 
 #include <stdio.h>
 
+class Board {
+    
+public:
+    void init();
+
+    
+private:
+    
+};
+
+
+static const int kStandardHeight = 20;
+static const int kStandardWidth = 10;
+
+extern bool board[kStandardHeight][kStandardWidth];
+
 #endif /* Board_hpp */

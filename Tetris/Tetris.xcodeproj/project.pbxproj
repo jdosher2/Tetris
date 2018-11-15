@@ -59,7 +59,7 @@
 		E3D30859219D9B8E00FC3A58 /* saved_scores */ = {isa = PBXFileReference; lastKnownFileType = text; path = saved_scores; sourceTree = "<group>"; };
 		E3D3085A219D9B9C00FC3A58 /* saved_players */ = {isa = PBXFileReference; lastKnownFileType = text; path = saved_players; sourceTree = "<group>"; };
 		E3D3085B219D9FD800FC3A58 /* Tetromino.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tetromino.cpp; sourceTree = "<group>"; };
-		E3D3085C219D9FD800FC3A58 /* Tetromino.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tetromino.hpp; sourceTree = "<group>"; };
+		E3D3085C219D9FD800FC3A58 /* Piece.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Piece.hpp; sourceTree = "<group>"; };
 		E3D3085E219DA02300FC3A58 /* Board.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		E3D3085F219DA02300FC3A58 /* Board.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Board.hpp; sourceTree = "<group>"; };
 		E3D30861219DA02C00FC3A58 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E3D3085F219DA02300FC3A58 /* Board.hpp */,
 				E3D30862219DA02C00FC3A58 /* Game.hpp */,
-				E3D3085C219D9FD800FC3A58 /* Tetromino.hpp */,
+				E3D3085C219D9FD800FC3A58 /* Piece.hpp */,
 			);
 			path = include;
 			sourceTree = "<group>";

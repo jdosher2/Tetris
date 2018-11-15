@@ -1,8 +1,8 @@
 //
-//  Tetromino.cpp
+//  Piece.cpp
 //  Tetris
 //
-//  Created by Julie Dosher on 11/14/18.
+//  Created by Julie Dosher on 11/15/18.
 //
 
-#include "Tetromino.hpp"
+#include "Piece.hpp"
