@@ -13,8 +13,7 @@
 class Block {
     
 public:
-    static const int kBlockHeight = 20;
-    static const int kBlockWidth = 20;
+    static const int kSideLength = 20;
     
 };
 

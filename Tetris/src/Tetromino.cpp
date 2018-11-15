@@ -7,6 +7,7 @@
 
 #include "Tetromino.hpp"
 
+
 void Tetromino::InitShapes() {
     Tetromino::I.push_back(ofPoint(0, 0));
     Tetromino::I.push_back(ofPoint(0, 1));
@@ -44,3 +45,32 @@ void Tetromino::InitShapes() {
     Tetromino::Z.push_back(ofPoint(1, 2));
 }
 
+
+void Tetromino::Move(int direction) {
+    Tetromino::SetX(Tetromino::GetX() + direction);
+}
+
+
+int Tetromino::GetX() {
+    return Tetromino::x;
+}
+
+int Tetromino::GetY() {
+    return Tetromino::y;
+}
+
+Tetromino::State Tetromino::GetState() {
+    return Tetromino::current_state;
+}
+
+void Tetromino::SetX(int x_pos) {
+    Tetromino::x = x_pos;
+}
+
+void Tetromino::SetY(int y_pos) {
+    Tetromino::y = y_pos;
+}
+
+void Tetromino::SetState(Tetromino::State state) {
+    Tetromino::current_state = state;
+}

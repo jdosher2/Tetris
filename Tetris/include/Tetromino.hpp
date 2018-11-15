@@ -12,7 +12,6 @@
 #include "Block.hpp"
 
 #include <stdio.h>
-#include <array>
 #include <map>
 #include <vector>
 
@@ -23,6 +22,14 @@ public:
         FALLING,
         LANDED
     };
+    
+    Tetromino(std::vector<ofPoint> vector_of_shape, int x_pos, int y_pos, State state) {
+        shape = vector_of_shape;
+        x = x_pos;
+        y = y_pos;
+        current_state = state;
+    }
+    
     static const int kTetrominoSize = 4;
     static std::vector<ofPoint> I;
     static std::vector<ofPoint> J;
@@ -32,10 +39,25 @@ public:
     static std::vector<ofPoint> T;
     static std::vector<ofPoint> Z;
     
-    static void draw();
-
+    void SetX(int x_pos);
+    void SetY(int y_pos);
+    void SetState(State state);
+    
+    static void Draw();
+    void Move(int direction);  // negative = left, positive = right
+    void Rotate();
+    
 private:
+    std::vector<ofPoint> shape;
+    int x;
+    int y;
+    State current_state;
+    
     static void InitShapes();
+    
+    int GetX();
+    int GetY();
+    State GetState();
 };
 
 extern const std::map<char, ofColor> shapes_and_colors = {

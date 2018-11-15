@@ -8,18 +8,21 @@
 #ifndef Board_hpp
 #define Board_hpp
 
+#include "ofMain.h"
+
 #include <stdio.h>
 
 class Board {
     
 public:
-    void init();
-
+    static void InitBoard();
+    static void CheckBoardForCompletedRow();
+    
     
 private:
-    
+    static bool CanRemoveRow(int row);
+    static void RemoveRow(int row);
 };
-
 
 static const int kStandardHeight = 20;
 static const int kStandardWidth = 10;
