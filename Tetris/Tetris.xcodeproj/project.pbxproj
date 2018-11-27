@@ -23,6 +23,7 @@
 		E3D30869219DF0E400FC3A58 /* Block.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3D30867219DF0E400FC3A58 /* Block.cpp */; };
 		E3D3086B219E0D7800FC3A58 /* tetromino_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3D3086A219E0D7800FC3A58 /* tetromino_test.cpp */; };
 		E3D3086D219E0D8900FC3A58 /* board_test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3D3086C219E0D8900FC3A58 /* board_test.cpp */; };
+		E3D3087021ADF75900FC3A58 /* score_tracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E3D3086E21ADF75900FC3A58 /* score_tracker.cpp */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
 /* End PBXBuildFile section */
@@ -71,6 +72,8 @@
 		E3D30868219DF0E400FC3A58 /* Block.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Block.hpp; sourceTree = "<group>"; };
 		E3D3086A219E0D7800FC3A58 /* tetromino_test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tetromino_test.cpp; sourceTree = "<group>"; };
 		E3D3086C219E0D8900FC3A58 /* board_test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = board_test.cpp; sourceTree = "<group>"; };
+		E3D3086E21ADF75900FC3A58 /* score_tracker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = score_tracker.cpp; sourceTree = "<group>"; };
+		E3D3086F21ADF75900FC3A58 /* score_tracker.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = score_tracker.hpp; sourceTree = "<group>"; };
 		E42962AC2163EDD300A6A9E2 /* ofCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofCamera.cpp; path = ../../../../libs/openFrameworks/3d/ofCamera.cpp; sourceTree = SOURCE_ROOT; };
 		E42962AD2163EDD300A6A9E2 /* ofMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofMesh.h; path = ../../../../libs/openFrameworks/3d/ofMesh.h; sourceTree = SOURCE_ROOT; };
 		E42962AE2163EDD300A6A9E2 /* ofNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofNode.h; path = ../../../../libs/openFrameworks/3d/ofNode.h; sourceTree = SOURCE_ROOT; };
@@ -327,6 +330,7 @@
 				E3D30868219DF0E400FC3A58 /* Block.hpp */,
 				E3D3085F219DA02300FC3A58 /* Board.hpp */,
 				E3D30862219DA02C00FC3A58 /* Game.hpp */,
+				E3D3086F21ADF75900FC3A58 /* score_tracker.hpp */,
 				E3D3085C219D9FD800FC3A58 /* Tetromino.hpp */,
 			);
 			path = include;
@@ -656,6 +660,7 @@
 				E3D30867219DF0E400FC3A58 /* Block.cpp */,
 				E3D3085E219DA02300FC3A58 /* Board.cpp */,
 				E3D30861219DA02C00FC3A58 /* Game.cpp */,
+				E3D3086E21ADF75900FC3A58 /* score_tracker.cpp */,
 				E3D3085B219D9FD800FC3A58 /* Tetromino.cpp */,
 			);
 			path = src;
@@ -764,6 +769,7 @@
 				E3D3086B219E0D7800FC3A58 /* tetromino_test.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
+				E3D3087021ADF75900FC3A58 /* score_tracker.cpp in Sources */,
 				106B9A6182DF98E835C09B47 /* ofxBaseGui.cpp in Sources */,
 				A61B54CA66E926867C59D2C6 /* ofxButton.cpp in Sources */,
 				E3D30869219DF0E400FC3A58 /* Block.cpp in Sources */,
