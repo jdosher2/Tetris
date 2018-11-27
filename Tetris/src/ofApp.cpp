@@ -2,7 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    default_song = "game_music.mp3";
+    
+    game_music.load(default_song);
+    game_music.setLoop(true);
+    game_music.play();
 }
 
 //--------------------------------------------------------------
@@ -20,7 +24,13 @@ void ofApp::keyPressed(int key){
     int lower_key = tolower(key);
     
     if (lower_key == 'p' || key == OF_KEY_ESC) {
-        // pause
+        if (current_state == IN_PROGRESS) {
+            // pause
+            game_music.setPaused(true);
+        } else if (current_state == PAUSED){
+            // unpause
+            game_music.setPaused(false);
+        }
         
     } else if (lower_key == 'w' || key == OF_KEY_UP) {
         // rotate

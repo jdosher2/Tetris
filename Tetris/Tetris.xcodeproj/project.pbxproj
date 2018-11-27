@@ -74,6 +74,7 @@
 		E3D3086C219E0D8900FC3A58 /* board_test.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = board_test.cpp; sourceTree = "<group>"; };
 		E3D3086E21ADF75900FC3A58 /* score_tracker.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = score_tracker.cpp; sourceTree = "<group>"; };
 		E3D3086F21ADF75900FC3A58 /* score_tracker.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = score_tracker.hpp; sourceTree = "<group>"; };
+		E3D3087521ADFAF300FC3A58 /* game_music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = game_music.mp3; sourceTree = "<group>"; };
 		E42962AC2163EDD300A6A9E2 /* ofCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ofCamera.cpp; path = ../../../../libs/openFrameworks/3d/ofCamera.cpp; sourceTree = SOURCE_ROOT; };
 		E42962AD2163EDD300A6A9E2 /* ofMesh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofMesh.h; path = ../../../../libs/openFrameworks/3d/ofMesh.h; sourceTree = SOURCE_ROOT; };
 		E42962AE2163EDD300A6A9E2 /* ofNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ofNode.h; path = ../../../../libs/openFrameworks/3d/ofNode.h; sourceTree = SOURCE_ROOT; };
@@ -352,6 +353,30 @@
 				E3D30859219D9B8E00FC3A58 /* saved_scores */,
 			);
 			path = build;
+			sourceTree = "<group>";
+		};
+		E3D3087221ADFA3600FC3A58 /* files */ = {
+			isa = PBXGroup;
+			children = (
+				E3D3087321ADFA4300FC3A58 /* graphics */,
+				E3D3087421ADFA4D00FC3A58 /* sound */,
+			);
+			path = files;
+			sourceTree = "<group>";
+		};
+		E3D3087321ADFA4300FC3A58 /* graphics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = graphics;
+			sourceTree = "<group>";
+		};
+		E3D3087421ADFA4D00FC3A58 /* sound */ = {
+			isa = PBXGroup;
+			children = (
+				E3D3087521ADFAF300FC3A58 /* game_music.mp3 */,
+			);
+			path = sound;
 			sourceTree = "<group>";
 		};
 		E42962AA2163EDD300A6A9E2 /* openFrameworks */ = {
@@ -642,6 +667,7 @@
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E3D30858219D9B7B00FC3A58 /* build */,
+				E3D3087221ADFA3600FC3A58 /* files */,
 				E3D30855219D9A2900FC3A58 /* include */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
 				E3D30857219D9AEB00FC3A58 /* tests */,
