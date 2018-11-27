@@ -43,6 +43,10 @@ public:
     void SetY(int y_pos);
     void SetState(State state);
     
+    int GetX();
+    int GetY();
+    State GetState();
+    
     static void Draw();
     void Move(int direction);  // negative = left, positive = right
     void Rotate();
@@ -52,12 +56,9 @@ private:
     int x;
     int y;
     State current_state;
+    double falling_speed = 0.0;
     
     static void InitShapes();
-    
-    int GetX();
-    int GetY();
-    State GetState();
 };
 
 extern const std::map<char, ofColor> shapes_and_colors = {
