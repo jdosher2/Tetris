@@ -36,11 +36,12 @@ void Board::RemoveRow(int row) {
     
     // collapse rows above
     for (int c = 0; c < kStandardWidth; c++) {
-        for (int r = row; r < kStandardHeight - 1; r++) {
-            board[r][c] = board[r + 1][c];
+        for (int r = row; r > 0; r--) {
+            board[r][c] = board[r - 1][c];
         }
-        board[kStandardHeight - 1][c] = false;
     }
+    
+    Board::CheckBoardForCompletedRow();
 }
 
 void Board::CheckBoardForCompletedRow() {
@@ -50,5 +51,14 @@ void Board::CheckBoardForCompletedRow() {
             return;
         }
     }
-    
 }
+
+bool Board::IsGameOver() {
+    for (int c = 0; c < kStandardWidth; c++) {
+        if (board[0][c] == true) {
+            return true;
+        }
+    }
+    return false;
+}
+

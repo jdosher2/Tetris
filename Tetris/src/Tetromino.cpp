@@ -7,7 +7,7 @@
 
 #include "Tetromino.hpp"
 
-
+// TODO: redo implementation of their shapes
 void Tetromino::InitShapes() {
     Tetromino::I.push_back(ofPoint(0, 0));
     Tetromino::I.push_back(ofPoint(0, 1));

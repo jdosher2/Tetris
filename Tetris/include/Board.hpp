@@ -23,6 +23,7 @@ public:
 private:
     static bool CanRemoveRow(int row);
     static void RemoveRow(int row);
+    static bool IsGameOver();
 };
 
 static const int kStandardHeight = 20;

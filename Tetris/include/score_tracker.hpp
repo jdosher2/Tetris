@@ -22,7 +22,6 @@ public:
     static const std::string kFileToStoreScores;
 
     static std::string DisplayTopScores();
-    static std::string DisplayPlayerScore();
     static void ReadPreviousTopScores(std::string score_file);
     static void SetNewTopScores(int current_game_score);
     static void WriteTopScoresToFile(std::string score_file);

@@ -42,11 +42,6 @@ std::string ScoreTracker::DisplayTopScores() {
     return "";
 }
 
-std::string ScoreTracker::DisplayPlayerScore() {
-    // TODO
-    
-    return "";
-}
 
 void ScoreTracker::WriteTopScoresToFile(std::string score_file) {
     std::ofstream output(score_file);

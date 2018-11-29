@@ -16,7 +16,11 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetBackgroundColor(0, 0, 0);
+    ofSetBackgroundColor(255, 255, 255);
+    
+    for (int i = 200; i < 400; i += 20) {
+        // grid
+    }
 }
 
 //--------------------------------------------------------------
@@ -26,9 +30,12 @@ void ofApp::keyPressed(int key){
     if (lower_key == 'p' || key == OF_KEY_ESC) {
         if (current_state == IN_PROGRESS) {
             // pause
+            current_state = PAUSED;
             game_music.setPaused(true);
+            
         } else if (current_state == PAUSED){
             // unpause
+            current_state = IN_PROGRESS;
             game_music.setPaused(false);
         }
         
@@ -44,6 +51,8 @@ void ofApp::keyPressed(int key){
     } else if (lower_key == 's' || key == OF_KEY_DOWN) {
         // fall faster
         
+    } else if (key == ' ') {
+        // fall immediately
     }
 }
 
