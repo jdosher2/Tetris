@@ -16,6 +16,8 @@ public:
     std::string default_song;
     ofSoundPlayer game_music;
     
+    ofFbo buffer;
+    
     void setup();
     void update();
     void draw();
@@ -34,5 +36,6 @@ public:
 		
 private:
     GameState current_state = IN_PROGRESS;
-    
 };
+
+

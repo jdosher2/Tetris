@@ -69,44 +69,40 @@ const bool shape_J[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tet
     }
 };
 
-/*
-void Tetromino::InitShapes() {
-    Tetromino::I.push_back(ofPoint(0, 0));
-    Tetromino::I.push_back(ofPoint(0, 1));
-    Tetromino::I.push_back(ofPoint(0, 2));
-    Tetromino::I.push_back(ofPoint(0, 3));
+const bool shape_L[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    {
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, true, true, true, false},
+        {false, true, false, false, false},
+        {false, false, false, false, false}
+    },
+    {
+        {false, false, false, false, false},
+        {false, true, true, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, false, false, false}
+    },
+    {
+        {false, false, false, false, false},
+        {false, false, false, true, false},
+        {false, true, true, true, false},
+        {false, false, false, false, false},
+        {false, false, false, false, false}
+    },
+    {
+        {false, false, false, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, true, true, false},
+        {false, false, false, false, false}
+    }
+};
+
+void Tetromino::Draw() {
     
-    Tetromino::J.push_back(ofPoint(0, 0));
-    Tetromino::J.push_back(ofPoint(1, 0));
-    Tetromino::J.push_back(ofPoint(1, 1));
-    Tetromino::J.push_back(ofPoint(1, 2));
-    
-    Tetromino::L.push_back(ofPoint(0, 0));
-    Tetromino::L.push_back(ofPoint(1, 0));
-    Tetromino::L.push_back(ofPoint(0, 1));
-    Tetromino::L.push_back(ofPoint(0, 2));
-    
-    Tetromino::O.push_back(ofPoint(0, 0));
-    Tetromino::O.push_back(ofPoint(1, 0));
-    Tetromino::O.push_back(ofPoint(0, 1));
-    Tetromino::O.push_back(ofPoint(1, 1));
-    
-    Tetromino::S.push_back(ofPoint(0, 0));
-    Tetromino::S.push_back(ofPoint(1, 0));
-    Tetromino::S.push_back(ofPoint(1, 1));
-    Tetromino::S.push_back(ofPoint(2, 1));
-    
-    Tetromino::T.push_back(ofPoint(0, 0));
-    Tetromino::T.push_back(ofPoint(0, 1));
-    Tetromino::T.push_back(ofPoint(1, 1));
-    Tetromino::T.push_back(ofPoint(0, 2));
-    
-    Tetromino::Z.push_back(ofPoint(0, 0));
-    Tetromino::Z.push_back(ofPoint(0, 1));
-    Tetromino::Z.push_back(ofPoint(1, 1));
-    Tetromino::Z.push_back(ofPoint(1, 2));
 }
-*/
 
 void Tetromino::Move(int direction) {
     Tetromino::SetX(Tetromino::GetX() + direction);

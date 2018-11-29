@@ -7,20 +7,14 @@ void ofApp::setup(){
     game_music.load(default_song);
     game_music.setLoop(true);
     game_music.play();
-}
-
-//--------------------------------------------------------------
-void ofApp::update(){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::draw(){
+    
+    buffer.allocate(ofGetWindowWidth(), ofGetWindowHeight());
+    buffer.begin();
     ofSetBackgroundColor(240, 255, 255);
     
     ofSetColor(0, 0, 0);
-    int board_width = Block::kSideLength * kStandardWidth;
-    int board_height = Block::kSideLength * kStandardHeight;
+    int board_width = Block::kSideLength * Board::kStandardWidth;
+    int board_height = Block::kSideLength * Board::kStandardHeight;
     int x_origin = 50;
     int y_origin = (ofGetWindowHeight() - board_height) / 2;
     ofDrawRectangle(x_origin, y_origin, board_width, board_height);
@@ -32,6 +26,25 @@ void ofApp::draw(){
     for (int y = y_origin; y < y_origin + board_height; y += Block::kSideLength) {
         ofDrawLine(x_origin, y, x_origin + board_width, y);
     }
+    
+    for (float x = 0; x < ofGetWindowWidth(); x++) {
+        for (float y = 0; y < ofGetWindowHeight(); y++) {
+             //Board::GenerateTetromino(x_origin, y_origin);
+        }
+    }
+    buffer.end();
+}
+
+//--------------------------------------------------------------
+void ofApp::update(){
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+    
+    buffer.draw(0, 0);
+   
 }
 
 //--------------------------------------------------------------
@@ -64,6 +77,10 @@ void ofApp::keyPressed(int key){
         
     } else if (key == ' ') {
         // fall immediately
+        
+    } else if (lower_key == 'm') {
+        // mute sound
+        game_music.setVolume(0.0f);
     }
 }
 
