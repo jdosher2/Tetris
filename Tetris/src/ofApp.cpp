@@ -16,10 +16,21 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetBackgroundColor(255, 255, 255);
+    ofSetBackgroundColor(240, 255, 255);
     
-    for (int i = 200; i < 400; i += 20) {
-        // grid
+    ofSetColor(0, 0, 0);
+    int board_width = Block::kSideLength * kStandardWidth;
+    int board_height = Block::kSideLength * kStandardHeight;
+    int x_origin = 50;
+    int y_origin = (ofGetWindowHeight() - board_height) / 2;
+    ofDrawRectangle(x_origin, y_origin, board_width, board_height);
+    
+    ofSetColor(30, 30, 30);
+    for (int x = x_origin; x < x_origin + board_width; x += Block::kSideLength) {
+        ofDrawLine(x, y_origin, x, y_origin + board_height);
+    }
+    for (int y = y_origin; y < y_origin + board_height; y += Block::kSideLength) {
+        ofDrawLine(x_origin, y, x_origin + board_width, y);
     }
 }
 

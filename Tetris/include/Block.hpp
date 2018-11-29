@@ -8,13 +8,23 @@
 #ifndef Block_hpp
 #define Block_hpp
 
+#include "ofMain.h"
+
 #include <stdio.h>
+
 
 class Block {
     
 public:
-    static const int kSideLength = 20;
+    static const int kSideLength = 35;
     
+    bool is_filled;
+    ofColor fill_color;
+   
+    Block(bool filled, ofColor color) {
+        is_filled = filled;
+        fill_color = color;
+    }
 };
 
 

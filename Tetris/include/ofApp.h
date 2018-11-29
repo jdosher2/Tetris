@@ -1,6 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Block.hpp"
+#include "Board.hpp"
 
 class ofApp : public ofBaseApp{
 

@@ -7,7 +7,69 @@
 
 #include "Tetromino.hpp"
 
-// TODO: redo implementation of their shapes
+const bool shape_I[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    {
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, true, true, true, true},
+        {false, false, false, false, false},
+        {false, false, false, false, false}
+    },
+    {
+        {false, false, false, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+    },
+    {
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {true, true, true, true, false},
+        {false, false, false, false, false},
+        {false, false, false, false, false}
+    },
+    {
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, false, false, false}
+    }
+};
+
+const bool shape_J[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    {
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+        {false, true, true, true, false},
+        {false, false, false, true, false},
+        {false, false, false, false, false},
+    },
+    {
+        {false, false, false, false, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, true, true, false, false},
+        {false, false, false, false, false},
+    },
+    {
+        {false, false, false, false, false},
+        {false, true, false, false, false},
+        {false, true, true, true, false},
+        {false, false, false, false, false},
+        {false, false, false, false, false},
+    },
+    {
+        {false, false, false, false, false},
+        {false, false, true, true, false},
+        {false, false, true, false, false},
+        {false, false, true, false, false},
+        {false, false, false, false, false},
+    }
+};
+
+/*
 void Tetromino::InitShapes() {
     Tetromino::I.push_back(ofPoint(0, 0));
     Tetromino::I.push_back(ofPoint(0, 1));
@@ -44,7 +106,7 @@ void Tetromino::InitShapes() {
     Tetromino::Z.push_back(ofPoint(1, 1));
     Tetromino::Z.push_back(ofPoint(1, 2));
 }
-
+*/
 
 void Tetromino::Move(int direction) {
     Tetromino::SetX(Tetromino::GetX() + direction);

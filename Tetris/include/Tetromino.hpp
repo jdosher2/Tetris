@@ -9,7 +9,6 @@
 #define Tetromino_hpp
 
 #include "ofMain.h"
-#include "Block.hpp"
 
 #include <stdio.h>
 #include <map>
@@ -22,15 +21,30 @@ public:
         FALLING,
         LANDED
     };
+    static const int kTetrominoSize = 4;
+    char letter;
+    bool shape_and_rotations[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1] = {};
+    ofColor color;
     
-    Tetromino(std::vector<ofPoint> vector_of_shape, int x_pos, int y_pos, State state) {
-        shape = vector_of_shape;
-        x = x_pos;
-        y = y_pos;
-        current_state = state;
+    
+    Tetromino(char l, bool s[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1], ofColor c) {
+        letter = l;
+        for (int rot = 0; rot < kTetrominoSize; rot++) {
+            for (int i = 0; i < kTetrominoSize + 1; i++) {
+                for (int j = 0; j < kTetrominoSize + 1; j++) {
+                    shape_and_rotations[rot][i][j] = s[rot][i][j];
+                }
+            }
+        }
+        color = color;
     }
     
-    static const int kTetrominoSize = 4;
+    
+    
+    
+    
+    
+    
     static std::vector<ofPoint> I;
     static std::vector<ofPoint> J;
     static std::vector<ofPoint> L;
@@ -38,6 +52,8 @@ public:
     static std::vector<ofPoint> S;
     static std::vector<ofPoint> T;
     static std::vector<ofPoint> Z;
+    
+   
     
     void SetX(int x_pos);
     void SetY(int y_pos);
@@ -52,14 +68,22 @@ public:
     void Rotate();
     
 private:
-    std::vector<ofPoint> shape;
+    //std::vector<ofPoint> shape;
     int x;
     int y;
     State current_state;
-    double falling_speed = 0.0;
+    double falling_speed = 0.5;
     
     static void InitShapes();
 };
+
+extern const bool shape_I[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_J[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_L[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_O[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_S[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_T[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_Z[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
 extern const std::map<char, ofColor> shapes_and_colors = {
     {'I', ofColor::cyan},
