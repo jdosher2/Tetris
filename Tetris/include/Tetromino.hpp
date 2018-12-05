@@ -26,11 +26,10 @@ public:
     static const int num_of_tetrominoes = 7;
     char letter;
     bool shape_and_rotations[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1] = {};
-    ofColor color;
     State current_state;
     
     
-    Tetromino(char name, const bool shape_array[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1], ofColor fill_color, State state) {
+    Tetromino(char name, const bool shape_array[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1], State state) {
         letter = name;
         for (int rot = 0; rot < kTetrominoSize; rot++) {
             for (int i = 0; i < kTetrominoSize + 1; i++) {
@@ -39,7 +38,6 @@ public:
                 }
             }
         }
-        color = fill_color;
         current_state = state;
     }
     
@@ -50,7 +48,6 @@ public:
     
     int GetX();
     int GetY();
-    ofColor GetColor();
     State GetState();
     
     void Draw();

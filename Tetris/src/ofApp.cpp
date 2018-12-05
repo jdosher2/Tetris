@@ -12,17 +12,6 @@ void ofApp::setup(){
     buffer.allocate(ofGetWindowWidth(), ofGetWindowHeight());
     buffer.begin();
     
-    // important window x,y values
-    int board_width = Block::kSideLength * Board::kStandardWidth;
-    int board_height = Block::kSideLength * Board::kStandardHeight;
-    int x_origin = 50;
-    int y_origin = (ofGetWindowHeight() - board_height) / 2;
-    
-    int preview_board_width = 210;
-    int preview_board_height = 210;
-    int preview_x_origin = (((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100);
-    int preview_y_origin = y_origin + (12 * Block::kSideLength);
-    
     
     // background
     ofSetColor(ofColor::slateGray);
@@ -125,6 +114,12 @@ void ofApp::keyPressed(int key){
         
     }
 }
+
+
+void ofApp::DrawNormalBackground() {
+    
+}
+
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){

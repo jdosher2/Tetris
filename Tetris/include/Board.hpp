@@ -33,6 +33,7 @@ public:
     static Tetromino tetromino_Z;
     
     static void InitBoard();
+    static void InitColors();
     static Tetromino GenerateTetromino(int x1, int y1, int block_side_length);
     static void CheckBoardForCompletedRow();
     

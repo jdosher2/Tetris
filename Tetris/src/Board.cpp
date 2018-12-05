@@ -9,18 +9,28 @@
 
 bool board[Board::kStandardHeight][Board::kStandardWidth] = {};
 
-Tetromino Board::tetromino_I = *new Tetromino('I', shape_I, ofColor::cyan, Tetromino::State::INACTIVE);
-Tetromino Board::tetromino_J = *new Tetromino('J', shape_J, ofColor::blue, Tetromino::State::INACTIVE);
-Tetromino Board::tetromino_L = *new Tetromino('L', shape_L, ofColor::orange, Tetromino::State::INACTIVE);
-Tetromino Board::tetromino_O = *new Tetromino('O', shape_O, ofColor::yellow, Tetromino::State::INACTIVE);
-Tetromino Board::tetromino_S = *new Tetromino('S', shape_S, ofColor::green, Tetromino::State::INACTIVE);
-Tetromino Board::tetromino_T = *new Tetromino('T', shape_T, ofColor::purple, Tetromino::State::INACTIVE);
-Tetromino Board::tetromino_Z = *new Tetromino('Z', shape_Z, ofColor::red, Tetromino::State::INACTIVE);
+Tetromino Board::tetromino_I = *new Tetromino('I', shape_I, Tetromino::State::INACTIVE);
+Tetromino Board::tetromino_J = *new Tetromino('J', shape_J, Tetromino::State::INACTIVE);
+Tetromino Board::tetromino_L = *new Tetromino('L', shape_L, Tetromino::State::INACTIVE);
+Tetromino Board::tetromino_O = *new Tetromino('O', shape_O, Tetromino::State::INACTIVE);
+Tetromino Board::tetromino_S = *new Tetromino('S', shape_S, Tetromino::State::INACTIVE);
+Tetromino Board::tetromino_T = *new Tetromino('T', shape_T, Tetromino::State::INACTIVE);
+Tetromino Board::tetromino_Z = *new Tetromino('Z', shape_Z, Tetromino::State::INACTIVE);
 
 Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes] = {Board::tetromino_I, Board::tetromino_J, Board::tetromino_L, Board::tetromino_O, Board::tetromino_S, Board::tetromino_T, Board::tetromino_Z};
 
-ofColor possible_colors[Tetromino::num_of_tetrominoes] = {ofColor::cyan, ofColor::blue, ofColor::orange, ofColor::yellow, ofColor::green, ofColor::purple, ofColor::red};
+ofColor possible_colors[Tetromino::num_of_tetrominoes];
 
+
+void Board::InitColors() {
+    possible_colors[0] = ofColor::cyan;
+    possible_colors[1] = ofColor::blue;
+    possible_colors[2] = ofColor::orange;
+    possible_colors[3] = ofColor::yellow;
+    possible_colors[4] = ofColor::green;
+    possible_colors[5] = ofColor::purple;
+    possible_colors[6] = ofColor::red;
+}
 
 void Board::InitBoard() {
     for (int r = 0; r < kStandardHeight; r++) {
@@ -31,10 +41,12 @@ void Board::InitBoard() {
 }
 
 Tetromino Board::GenerateTetromino(int x1, int y1, int block_side_length) {
+    InitColors();
+    
     int random_index = rand() % Tetromino::num_of_tetrominoes;
     Tetromino chosen_tetromino = possible_tetrominoes[random_index];
     ofColor chosen_color = possible_colors[random_index];
-    ofSetColor(ofColor::purple);
+    ofSetColor(chosen_color);
     // TODO: fix color bug
     
     int x = x1;

@@ -180,10 +180,6 @@ int Tetromino::GetY() {
     return Tetromino::y;
 }
 
-ofColor Tetromino::GetColor() {
-    return Tetromino::color;
-}
-
 Tetromino::State Tetromino::GetState() {
     return Tetromino::current_state;
 }
