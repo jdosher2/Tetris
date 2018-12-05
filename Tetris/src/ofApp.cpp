@@ -8,6 +8,7 @@ void ofApp::setup(){
     game_music.setLoop(true);
     game_music.play();
     
+    
     buffer.allocate(ofGetWindowWidth(), ofGetWindowHeight());
     buffer.begin();
     ofSetBackgroundColor(240, 255, 255);
@@ -27,11 +28,8 @@ void ofApp::setup(){
         ofDrawLine(x_origin, y, x_origin + board_width, y);
     }
     
-    for (float x = 0; x < ofGetWindowWidth(); x++) {
-        for (float y = 0; y < ofGetWindowHeight(); y++) {
-             //Board::GenerateTetromino(x_origin, y_origin);
-        }
-    }
+    Board::GenerateTetromino(x_origin, y_origin);
+    
     buffer.end();
 }
 
@@ -44,14 +42,14 @@ void ofApp::update(){
 void ofApp::draw(){
     
     buffer.draw(0, 0);
-   
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     int lower_key = tolower(key);
     
-    if (lower_key == 'p' || key == OF_KEY_ESC) {
+    if (lower_key == 'p') {
         if (current_state == IN_PROGRESS) {
             // pause
             current_state = PAUSED;
@@ -78,9 +76,6 @@ void ofApp::keyPressed(int key){
     } else if (key == ' ') {
         // fall immediately
         
-    } else if (lower_key == 'm') {
-        // mute sound
-        game_music.setVolume(0.0f);
     }
 }
 

@@ -13,7 +13,8 @@ Tetromino Board::tetromino_I = *new Tetromino('I', shape_I, ofColor::cyan, Tetro
 Tetromino Board::tetromino_J = *new Tetromino('J', shape_J, ofColor::blue, Tetromino::State::INACTIVE);
 Tetromino Board::tetromino_L = *new Tetromino('L', shape_L, ofColor::orange, Tetromino::State::INACTIVE);
 
-Tetromino possible_tetrominoes[] = {Board::tetromino_I, Board::tetromino_J, Board::tetromino_L};
+Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes] = {Board::tetromino_I, Board::tetromino_J, Board::tetromino_L, Board::tetromino_I, Board::tetromino_I, Board::tetromino_I, Board::tetromino_I};
+ofColor possible_colors[Tetromino::num_of_tetrominoes] = {ofColor::cyan, ofColor::blue, ofColor::orange, ofColor::yellow, ofColor::green, ofColor::purple, ofColor::red};
 
 
 void Board::InitBoard() {
@@ -25,18 +26,22 @@ void Board::InitBoard() {
 }
 
 Tetromino Board::GenerateTetromino(int x1, int y1) {
-    int random_index = rand() % sizeof(possible_tetrominoes);
+    
+    int random_index = rand() % Tetromino::num_of_tetrominoes;
+    Tetromino chosen_tetromino = possible_tetrominoes[random_index];
+    ofColor chosen_color = possible_colors[random_index];
+    ofSetColor(chosen_color);
+    
+    std::cout << chosen_tetromino.letter << std::endl;
+    std::cout << possible_colors[1] << std::endl;
+    std::cout << random_index << std::endl;
+    std::cout << Tetromino::num_of_tetrominoes;
     
     int x = x1;
     int y = y1;
     
-    Tetromino chosen_tetromino = possible_tetrominoes[random_index];
-    std::cout << chosen_tetromino.letter;
-    
-    ofSetColor(chosen_tetromino.color);
-    
     for (int r = 0; r < Tetromino::kTetrominoSize + 1; r++) {
-        for (int c = 0; c < Tetromino::kTetrominoSize; c++) {
+        for (int c = 0; c < Tetromino::kTetrominoSize + 1; c++) {
             if (chosen_tetromino.shape_and_rotations[0][r][c]) {
                 ofDrawRectangle(x, y, Block::kSideLength, Block::kSideLength);
             }
@@ -57,7 +62,6 @@ bool Board::CanRemoveRow(int row) {
     }
     return true;
 }
-
 
 void Board::RemoveRow(int row) {
     // clear row
@@ -92,4 +96,3 @@ bool Board::IsGameOver() {
     }
     return false;
 }
-

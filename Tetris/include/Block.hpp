@@ -27,6 +27,4 @@ public:
     }
 };
 
-
-
 #endif /* Block_hpp */

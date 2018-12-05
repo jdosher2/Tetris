@@ -51,5 +51,3 @@ void ScoreTracker::WriteTopScoresToFile(std::string score_file) {
     }
     output.close();
 }
-
-

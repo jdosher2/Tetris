@@ -37,6 +37,7 @@ private:
 
 
 extern bool board[Board::kStandardHeight][Board::kStandardWidth];
-extern Tetromino possible_tetrominoes[];
+extern Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes];
+extern ofColor possible_colors[Tetromino::num_of_tetrominoes];
 
 #endif /* Board_hpp */

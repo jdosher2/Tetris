@@ -23,10 +23,12 @@ public:
         LANDED
     };
     static const int kTetrominoSize = 4;
+    static const int num_of_tetrominoes = 7;
     char letter;
     bool shape_and_rotations[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1] = {};
     ofColor color;
     State current_state;
+    
     
     Tetromino(char name, const bool shape_array[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1], ofColor fill_color, State state) {
         letter = name;
@@ -48,6 +50,7 @@ public:
     
     int GetX();
     int GetY();
+    ofColor GetColor();
     State GetState();
     
     void Draw();
@@ -56,12 +59,9 @@ public:
     
     
 private:
-    //std::vector<ofPoint> shape;
     int x;
     int y;
     double falling_speed = 0.5;
-    
-    static void InitShapes();
 };
 
 extern const bool shape_I[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
@@ -77,5 +77,6 @@ extern const bool shape_S[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize +
 extern const bool shape_T[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
 extern const bool shape_Z[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+
 
 #endif /* Tetromino_hpp */

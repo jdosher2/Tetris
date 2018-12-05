@@ -108,13 +108,16 @@ void Tetromino::Move(int direction) {
     Tetromino::SetX(Tetromino::GetX() + direction);
 }
 
-
 int Tetromino::GetX() {
     return Tetromino::x;
 }
 
 int Tetromino::GetY() {
     return Tetromino::y;
+}
+
+ofColor Tetromino::GetColor() {
+    return Tetromino::color;
 }
 
 Tetromino::State Tetromino::GetState() {
