@@ -17,6 +17,7 @@ class Block {
     
 public:
     static const int kSideLength = 35;
+    static const int kPreviewSideLength = 30;
     
     bool is_filled;
     ofColor fill_color;

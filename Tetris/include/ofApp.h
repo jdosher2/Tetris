@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Block.hpp"
 #include "Board.hpp"
+#include "Game.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -17,6 +18,7 @@ public:
     ofSoundPlayer game_music;
     
     ofFbo buffer;
+    ofTrueTypeFont game_font;
     
     void setup();
     void update();

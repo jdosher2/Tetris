@@ -15,6 +15,7 @@ class Game {
 public:
     static int current_level;
     static int score;
+    static int lines_cleared;
     
     
 };

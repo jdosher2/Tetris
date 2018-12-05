@@ -11,15 +11,55 @@ void ofApp::setup(){
     
     buffer.allocate(ofGetWindowWidth(), ofGetWindowHeight());
     buffer.begin();
-    ofSetBackgroundColor(240, 255, 255);
     
-    ofSetColor(0, 0, 0);
+    // important window x,y values
     int board_width = Block::kSideLength * Board::kStandardWidth;
     int board_height = Block::kSideLength * Board::kStandardHeight;
     int x_origin = 50;
     int y_origin = (ofGetWindowHeight() - board_height) / 2;
+    
+    int preview_board_width = 210;
+    int preview_board_height = 210;
+    int preview_x_origin = (((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100);
+    int preview_y_origin = y_origin + (12 * Block::kSideLength);
+    
+    
+    // background
+    ofSetColor(ofColor::slateGray);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    
+    
+    // placeholders
+    ofSetColor(ofColor::black);
+    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2) + 10, y_origin + (3 * Block::kSideLength), 100, - Block::kSideLength * 0.9);
+    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2) + 10, y_origin + (5 * Block::kSideLength), 100, - Block::kSideLength * 0.9);
+    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2) + 10, y_origin + (7 * Block::kSideLength), 100, - Block::kSideLength * 0.9);
+    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (12 * Block::kSideLength), 210, 210);
+    
+    
+    // text
+    ofSetColor(ofColor::white);
+    game_font.load("zian.ttf", 40);
+    game_font.drawString("tetris", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + Block::kSideLength);
+    
+    game_font.load("zian.ttf", 20);
+    game_font.drawString("level", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (3 * Block::kSideLength));
+    game_font.drawString("score", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (5 * Block::kSideLength));
+    game_font.drawString("lines", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (7 * Block::kSideLength));
+    game_font.drawString("next", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (12 * Block::kSideLength) - 10);
+    
+    
+    // playing board
+    ofSetColor(ofColor::black);
     ofDrawRectangle(x_origin, y_origin, board_width, board_height);
     
+    
+    // pieces
+    Board::GenerateTetromino(x_origin + (2 * Block::kSideLength), y_origin - Block::kSideLength, Block::kSideLength);
+    Board::GenerateTetromino(((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100 + Block::kPreviewSideLength, y_origin + (12 * Block::kSideLength) + Block::kPreviewSideLength, Block::kPreviewSideLength);
+    
+    
+    // gridlines
     ofSetColor(30, 30, 30);
     for (int x = x_origin; x < x_origin + board_width; x += Block::kSideLength) {
         ofDrawLine(x, y_origin, x, y_origin + board_height);
@@ -28,7 +68,14 @@ void ofApp::setup(){
         ofDrawLine(x_origin, y, x_origin + board_width, y);
     }
     
-    Board::GenerateTetromino(x_origin, y_origin);
+    for (int x = preview_x_origin; x < preview_x_origin + preview_board_width; x += Block::kPreviewSideLength) {
+        ofDrawLine(x, preview_y_origin, x, preview_y_origin + preview_board_height);
+    }
+    for (int y = preview_y_origin; y < preview_y_origin + preview_board_height; y += Block::kPreviewSideLength) {
+        ofDrawLine(preview_x_origin, y, preview_x_origin + preview_board_width, y);
+    }
+    
+    
     
     buffer.end();
 }
