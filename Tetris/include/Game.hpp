@@ -17,6 +17,8 @@ public:
     static int score;
     static int lines_cleared;
     
+    static double falling_speed;
+    static constexpr double level_multiplier = 0.05;
     
 };
 

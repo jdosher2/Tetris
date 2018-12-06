@@ -26,7 +26,7 @@ public:
     char letter;
     bool shape_and_rotations[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1] = {};
     State current_state;
-    
+    std::pair<int, int> block_locations[kTetrominoSize] = {};
     
     Tetromino(char name, const bool shape_array[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1], State state) {
         letter = name;

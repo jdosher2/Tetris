@@ -8,6 +8,7 @@ void ofApp::setup(){
     game_music.setLoop(true);
     game_music.play();
     
+    Board::InitBoard();
     
     buffer.allocate(ofGetWindowWidth(), ofGetWindowHeight());
     buffer.begin();
@@ -72,8 +73,6 @@ void ofApp::setup(){
     for (int y = preview_y_origin; y < preview_y_origin + preview_board_height; y += Block::kPreviewSideLength) {
         ofDrawLine(preview_x_origin, y, preview_x_origin + preview_board_width, y);
     }
-    
-    
     
     buffer.end();
 }
