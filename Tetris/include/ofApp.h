@@ -60,7 +60,9 @@ private:
     
     void DrawNormalBackground();
     void DrawPausedBackground();
-    void UpdateScoreText();
+    void DrawGridlines();
+    void DrawText();
+    void DrawScoreText();
 };
 
 

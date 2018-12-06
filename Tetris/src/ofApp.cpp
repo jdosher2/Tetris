@@ -3,63 +3,50 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     default_song = "game_music.mp3";
-    
     game_music.load(default_song);
     game_music.setLoop(true);
     game_music.play();
     
     Board::InitBoard();
+    ofSetFrameRate(1);
+}
+
+//--------------------------------------------------------------
+void ofApp::update(){
+    Board::Fall(x_origin, y_origin);
+}
+
+//--------------------------------------------------------------
+void ofApp::draw(){
+    ofApp::DrawNormalBackground();
+    ofApp::DrawText();
+    ofApp::DrawScoreText();
     
-    buffer.allocate(ofGetWindowWidth(), ofGetWindowHeight());
-    buffer.begin();
-    
-    
-    // background
-    ofSetColor(ofColor::slateGray);
-    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-    
-    
-    // placeholders
-    ofSetColor(ofColor::black);
-    ofDrawRectangle(placeholder_x_start, y_origin + (3 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // level
-    ofDrawRectangle(placeholder_x_start, y_origin + (5 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // score
-    ofDrawRectangle(placeholder_x_start, y_origin + (7 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // lines
-    ofDrawRectangle(label_x_start, y_origin + (12 * Block::kSideLength), 210, 210); // next box
-    
-    
-    // title
-    ofSetColor(ofColor::white);
-    game_font.load("zian.ttf", 40);
-    game_font.drawString("tetris", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + Block::kSideLength);
-    
-    
-    // labels
-    game_font.load("zian.ttf", 20);
-    game_font.drawString("level", label_x_start, y_origin + (3 * Block::kSideLength));
-    game_font.drawString("score", label_x_start, y_origin + (5 * Block::kSideLength));
-    game_font.drawString("lines", label_x_start, y_origin + (7 * Block::kSideLength));
-    game_font.drawString("next", label_x_start, y_origin + (12 * Block::kSideLength) - 10);
-    
-    
-    // scores
-    game_font.load("azonix.otf", 22);
-    game_font.drawString(std::to_string(Game::current_level), score_text_start, y_origin + (3 * Block::kSideLength));
-    game_font.drawString(std::to_string(Game::score), score_text_start, y_origin + (5 * Block::kSideLength));
-    game_font.drawString(std::to_string(Game::lines_cleared), score_text_start, y_origin + (7 * Block::kSideLength));
-    
-    
-    // playing board
-    ofSetColor(ofColor::black);
-    ofDrawRectangle(x_origin, y_origin, board_width, board_height);
-    
-    
-    // pieces
-    Board::GenerateTetromino(x_origin, y_origin, Block::kSideLength, Tetromino::State::FALLING);
+    if (all_created_tetrominoes.size() == 0) {
+        Board::GenerateTetromino(x_origin, y_origin, Block::kSideLength, Tetromino::State::FALLING);
+    }
     Board::GenerateTetromino(preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength, Tetromino::State::WAITING);
     
     Board::Fall(x_origin, y_origin);
+    ofApp::DrawGridlines();
+}
+
+//--------------------------------------------------------------
+void ofApp::DrawNormalBackground() {
+    ofSetColor(ofColor::slateGray);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     
-    // gridlines
+    ofSetColor(ofColor::black);
+    ofDrawRectangle(x_origin, y_origin, board_width, board_height);
+}
+
+//--------------------------------------------------------------
+void ofApp::DrawPausedBackground() {
+    
+}
+
+//--------------------------------------------------------------
+void ofApp::DrawGridlines() {
     ofSetColor(30, 30, 30);
     for (int x = x_origin; x < x_origin + board_width; x += Block::kSideLength) {
         ofDrawLine(x, y_origin, x, y_origin + board_height);
@@ -74,20 +61,34 @@ void ofApp::setup(){
     for (int y = preview_y_origin; y < preview_y_origin + preview_board_height; y += Block::kPreviewSideLength) {
         ofDrawLine(preview_x_origin, y, preview_x_origin + preview_board_width, y);
     }
-    
-    buffer.end();
 }
 
 //--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::DrawText() {
+    ofSetColor(ofColor::white);
+    game_font.load("zian.ttf", 40);
+    game_font.drawString("tetris", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + Block::kSideLength);
     
+    game_font.load("zian.ttf", 20);
+    game_font.drawString("level", label_x_start, y_origin + (3 * Block::kSideLength));
+    game_font.drawString("score", label_x_start, y_origin + (5 * Block::kSideLength));
+    game_font.drawString("lines", label_x_start, y_origin + (7 * Block::kSideLength));
+    game_font.drawString("next", label_x_start, y_origin + (12 * Block::kSideLength) - 10);
 }
 
 //--------------------------------------------------------------
-void ofApp::draw(){
+void ofApp::DrawScoreText() {
+    ofSetColor(ofColor::black);
+    ofDrawRectangle(placeholder_x_start, y_origin + (3 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // level
+    ofDrawRectangle(placeholder_x_start, y_origin + (5 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // score
+    ofDrawRectangle(placeholder_x_start, y_origin + (7 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // lines
+    ofDrawRectangle(label_x_start, y_origin + (12 * Block::kSideLength), 210, 210); // next box
     
-    buffer.draw(0, 0);
-    
+    ofSetColor(ofColor::white);
+    game_font.load("azonix.otf", 22);
+    game_font.drawString(std::to_string(Game::current_level), score_text_start, y_origin + (3 * Block::kSideLength));
+    game_font.drawString(std::to_string(Game::score), score_text_start, y_origin + (5 * Block::kSideLength));
+    game_font.drawString(std::to_string(Game::lines_cleared), score_text_start, y_origin + (7 * Block::kSideLength));
 }
 
 //--------------------------------------------------------------
@@ -123,12 +124,6 @@ void ofApp::keyPressed(int key){
         
     }
 }
-
-
-void ofApp::DrawNormalBackground() {
-    
-}
-
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){

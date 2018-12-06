@@ -40,6 +40,7 @@ public:
 private:
     static const int board_x_entry_point = 3;
     
+    static bool CanFall();
     static bool CanRemoveRow(int row);
     static void RemoveRow(int row);
     static bool IsGameOver();
