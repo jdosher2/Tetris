@@ -59,6 +59,8 @@
 		CC050FCE6035B4BAFB0D11B1 /* ofxSliderGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSliderGroup.h; path = ../../../../addons/ofxGui/src/ofxSliderGroup.h; sourceTree = SOURCE_ROOT; };
 		D41FA502010DB4C51A4C1390 /* ofxSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ofxSlider.h; path = ../../../../addons/ofxGui/src/ofxSlider.h; sourceTree = SOURCE_ROOT; };
 		E118568A6BABFFADB75DB858 /* ofxToggle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ofxToggle.cpp; path = ../../../../addons/ofxGui/src/ofxToggle.cpp; sourceTree = SOURCE_ROOT; };
+		E3663A2021B8561900D07936 /* zian.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = zian.ttf; path = bin/data/zian.ttf; sourceTree = SOURCE_ROOT; };
+		E3663A2321B8570100D07936 /* azonix.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = azonix.otf; path = bin/data/azonix.otf; sourceTree = SOURCE_ROOT; };
 		E3D30856219D9AB600FC3A58 /* catch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
 		E3D30859219D9B8E00FC3A58 /* saved_scores */ = {isa = PBXFileReference; lastKnownFileType = text; path = saved_scores; sourceTree = "<group>"; };
 		E3D3085A219D9B9C00FC3A58 /* saved_players */ = {isa = PBXFileReference; lastKnownFileType = text; path = saved_players; sourceTree = "<group>"; };
@@ -323,6 +325,15 @@
 			name = addons;
 			sourceTree = "<group>";
 		};
+		E3663A1F21B8560500D07936 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E3663A2321B8570100D07936 /* azonix.otf */,
+				E3663A2021B8561900D07936 /* zian.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 		E3D30855219D9A2900FC3A58 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +369,7 @@
 		E3D3087221ADFA3600FC3A58 /* files */ = {
 			isa = PBXGroup;
 			children = (
+				E3663A1F21B8560500D07936 /* fonts */,
 				E3D3087321ADFA4300FC3A58 /* graphics */,
 				E3D3087421ADFA4D00FC3A58 /* sound */,
 			);

@@ -19,8 +19,7 @@ public:
     enum State {
         INACTIVE,
         WAITING,
-        FALLING,
-        LANDED
+        FALLING
     };
     static const int kTetrominoSize = 4;
     static const int num_of_tetrominoes = 7;

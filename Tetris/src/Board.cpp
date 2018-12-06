@@ -7,7 +7,7 @@
 
 #include "Board.hpp"
 
-bool board[Board::kStandardHeight][Board::kStandardWidth] = {};
+ofColor board[Board::kStandardHeight][Board::kStandardWidth] = {};
 
 Tetromino Board::tetromino_I = *new Tetromino('I', shape_I, Tetromino::State::INACTIVE);
 Tetromino Board::tetromino_J = *new Tetromino('J', shape_J, Tetromino::State::INACTIVE);
@@ -40,18 +40,18 @@ void Board::InitBoard() {
     }
 }
 
-Tetromino Board::GenerateTetromino(int x1, int y1, int block_side_length) {
+Tetromino Board::GenerateTetromino(int x1, int y1, int block_side_length, Tetromino::State t_state) {
     InitColors();
     
     int random_index = rand() % Tetromino::num_of_tetrominoes;
     Tetromino chosen_tetromino = possible_tetrominoes[random_index];
     ofColor chosen_color = possible_colors[random_index];
     ofSetColor(chosen_color);
-    // TODO: fix color bug
     
     int x = x1;
     int y = y1;
     
+    /*
     for (int r = 0; r < Tetromino::kTetrominoSize + 1; r++) {
         for (int c = 0; c < Tetromino::kTetrominoSize + 1; c++) {
             if (chosen_tetromino.shape_and_rotations[0][r][c]) {
@@ -62,8 +62,28 @@ Tetromino Board::GenerateTetromino(int x1, int y1, int block_side_length) {
         x = x1;
         y += block_side_length;
     }
+    */
+    int r_b = Board::board_x_entry_point;
+    int c_b = 1;
+    
+    for (int r_t = 2; r_t < 4; r_t++) {
+        for (int c_t = 1; c_t < 5; c_t++) {
+            if (chosen_tetromino.shape_and_rotations[0][r_t][c_t]) {
+                board[r_b][c_b] = chosen_color;
+                ofDrawRectangle(x1 + (r_b * block_side_length), y1 + (c_b * block_side_length), block_side_length, block_side_length);
+            }
+            r_b++;
+        }
+        r_b = Board::board_x_entry_point;
+        c_b++;
+    }
+    
     
     return chosen_tetromino;
+}
+
+void Board::DrawTetrominoToWindow() {
+    
 }
 
 bool Board::CanRemoveRow(int row) {

@@ -45,6 +45,9 @@ private:
     const int board_height = Block::kSideLength * Board::kStandardHeight;
     const int x_origin = 50;
     const int y_origin = (ofGetWindowHeight() - board_height) / 2;
+    const int label_x_start = ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100;
+    const int placeholder_x_start = ((x_origin + board_width + ofGetWindowWidth()) / 2) + 10;
+    const int score_text_start = ((x_origin + board_width + ofGetWindowWidth()) / 2) + 20;
     
     const int preview_board_width = 210;
     const int preview_board_height = 210;

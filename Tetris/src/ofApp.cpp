@@ -20,22 +20,31 @@ void ofApp::setup(){
     
     // placeholders
     ofSetColor(ofColor::black);
-    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2) + 10, y_origin + (3 * Block::kSideLength), 100, - Block::kSideLength * 0.9);
-    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2) + 10, y_origin + (5 * Block::kSideLength), 100, - Block::kSideLength * 0.9);
-    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2) + 10, y_origin + (7 * Block::kSideLength), 100, - Block::kSideLength * 0.9);
-    ofDrawRectangle(((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (12 * Block::kSideLength), 210, 210);
+    ofDrawRectangle(placeholder_x_start, y_origin + (3 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // level
+    ofDrawRectangle(placeholder_x_start, y_origin + (5 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // score
+    ofDrawRectangle(placeholder_x_start, y_origin + (7 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // lines
+    ofDrawRectangle(label_x_start, y_origin + (12 * Block::kSideLength), 210, 210); // next box
     
     
-    // text
+    // title
     ofSetColor(ofColor::white);
     game_font.load("zian.ttf", 40);
     game_font.drawString("tetris", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + Block::kSideLength);
     
+    
+    // labels
     game_font.load("zian.ttf", 20);
-    game_font.drawString("level", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (3 * Block::kSideLength));
-    game_font.drawString("score", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (5 * Block::kSideLength));
-    game_font.drawString("lines", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (7 * Block::kSideLength));
-    game_font.drawString("next", ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100, y_origin + (12 * Block::kSideLength) - 10);
+    game_font.drawString("level", label_x_start, y_origin + (3 * Block::kSideLength));
+    game_font.drawString("score", label_x_start, y_origin + (5 * Block::kSideLength));
+    game_font.drawString("lines", label_x_start, y_origin + (7 * Block::kSideLength));
+    game_font.drawString("next", label_x_start, y_origin + (12 * Block::kSideLength) - 10);
+    
+    
+    // scores
+    game_font.load("azonix.otf", 22);
+    game_font.drawString(std::to_string(Game::current_level), score_text_start, y_origin + (3 * Block::kSideLength));
+    game_font.drawString(std::to_string(Game::score), score_text_start, y_origin + (5 * Block::kSideLength));
+    game_font.drawString(std::to_string(Game::lines_cleared), score_text_start, y_origin + (7 * Block::kSideLength));
     
     
     // playing board
@@ -44,8 +53,8 @@ void ofApp::setup(){
     
     
     // pieces
-    Board::GenerateTetromino(x_origin + (2 * Block::kSideLength), y_origin - Block::kSideLength, Block::kSideLength);
-    Board::GenerateTetromino(((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100 + Block::kPreviewSideLength, y_origin + (12 * Block::kSideLength) + Block::kPreviewSideLength, Block::kPreviewSideLength);
+    Board::GenerateTetromino(x_origin, y_origin, Block::kSideLength, Tetromino::State::FALLING);
+    Board::GenerateTetromino(preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength, Tetromino::State::WAITING);
     
     
     // gridlines

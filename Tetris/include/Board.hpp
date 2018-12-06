@@ -22,6 +22,8 @@ public:
     static const int kStandardWidth = 10;
     
     static Tetromino active_tetromino;
+    static Tetromino waiting_tetromino;
+    static Tetromino inactive_tetromino;
     
     static Tetromino tetromino_null;
     static Tetromino tetromino_I;
@@ -34,18 +36,21 @@ public:
     
     static void InitBoard();
     static void InitColors();
-    static Tetromino GenerateTetromino(int x1, int y1, int block_side_length);
+    static Tetromino GenerateTetromino(int x1, int y1, int block_side_length, Tetromino::State t_state);
     static void CheckBoardForCompletedRow();
     
     
 private:
+    static const int board_x_entry_point = 3;
+    
+    static void DrawTetrominoToWindow();
     static bool CanRemoveRow(int row);
     static void RemoveRow(int row);
     static bool IsGameOver();
 };
 
 
-extern bool board[Board::kStandardHeight][Board::kStandardWidth];
+extern ofColor board[Board::kStandardHeight][Board::kStandardWidth];
 extern Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes];
 extern ofColor possible_colors[Tetromino::num_of_tetrominoes];
 
