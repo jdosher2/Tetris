@@ -57,6 +57,7 @@ void ofApp::setup(){
     Board::GenerateTetromino(x_origin, y_origin, Block::kSideLength, Tetromino::State::FALLING);
     Board::GenerateTetromino(preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength, Tetromino::State::WAITING);
     
+    Board::Fall(x_origin, y_origin);
     
     // gridlines
     ofSetColor(30, 30, 30);

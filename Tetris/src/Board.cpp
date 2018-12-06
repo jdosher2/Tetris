@@ -50,6 +50,8 @@ Tetromino Board::GenerateTetromino(int x_origin, int y_origin, int block_side_le
     ofColor chosen_color = possible_colors[random_index];
     ofSetColor(chosen_color);
     
+    chosen_tetromino.SetState(t_state);
+    
     int x = x_origin;
     int y = y_origin;
     int r_b = Board::board_x_entry_point;
@@ -62,13 +64,13 @@ Tetromino Board::GenerateTetromino(int x_origin, int y_origin, int block_side_le
                 board[r_b][c_b] = chosen_color;
                 ofDrawRectangle(x_origin + (r_b * block_side_length), y_origin + (c_b * block_side_length), block_side_length, block_side_length);
                 chosen_tetromino.block_locations[block_count] = std::make_pair(r_b, c_b);
+                block_count++;
             }
             r_b++;
         }
         r_b = Board::board_x_entry_point;
         c_b++;
     }
-    chosen_tetromino.SetState(t_state);
     all_created_tetrominoes.push_back(chosen_tetromino);
     
     return chosen_tetromino;
@@ -77,23 +79,56 @@ Tetromino Board::GenerateTetromino(int x_origin, int y_origin, int block_side_le
 void Board::Fall(int x_origin, int y_origin) {
     for (int i = 0; i < all_created_tetrominoes.size(); i++) {
         if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
+            ofColor color;
+            switch (all_created_tetrominoes[i].letter) {
+                case 'I':
+                    color = ofColor::cyan;
+                    break;
+                case 'J':
+                    color = ofColor::blue;
+                    break;
+                case 'L':
+                    color = ofColor::orange;
+                    break;
+                case 'O':
+                    color = ofColor::yellow;
+                    break;
+                case 'S':
+                    color = ofColor::green;
+                    break;
+                case 'T':
+                    color = ofColor::purple;
+                    break;
+                case 'Z':
+                    color = ofColor::red;
+                    break;
+                default:
+                    color = ofColor::white;
+                    break;
+            }
+            
+            int x;
+            int original_y;
+            
             for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
                 // check original location/color
                 std::pair<int, int> original_block_location = all_created_tetrominoes[i].block_locations[block];
-                int x = original_block_location.first;
-                int original_y = original_block_location.second;
-                
-                ofColor color = board[x][original_y];
+                x = original_block_location.first;
+                original_y = original_block_location.second;
                 board[x][original_y] = ofColor::black;
                 ofSetColor(ofColor::black);
                 ofDrawRectangle(x_origin + (x * Block::kSideLength), y_origin + (original_y * Block::kSideLength), Block::kSideLength, Block::kSideLength);
-                
-                
+            }
+            
+            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
                 // move each block down 1 space by changing fill color
+                std::pair<int, int> original_block_location = all_created_tetrominoes[i].block_locations[block];
+                x = original_block_location.first;
+                original_y = original_block_location.second;
                 all_created_tetrominoes[i].block_locations[block] = std::make_pair(x, original_y + 1);
                 board[x][original_y + 1] = color;
                 ofSetColor(color);
-                ofDrawRectangle(x, original_y + 1, Block::kSideLength, Block::kSideLength);
+                ofDrawRectangle(x_origin + (x * Block::kSideLength), y_origin + ((original_y + 1) * Block::kSideLength), Block::kSideLength, Block::kSideLength);
             }
         }
     }

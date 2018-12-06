@@ -18,7 +18,7 @@ public:
     static int lines_cleared;
     
     static double falling_speed;
-    static constexpr double level_multiplier = 0.05;
+    static constexpr double falling_speed_increment = 0.05;
     
 };
 
