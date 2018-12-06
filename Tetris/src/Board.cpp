@@ -19,19 +19,8 @@ Tetromino Board::tetromino_Z = *new Tetromino('Z', shape_Z, Tetromino::State::IN
 
 Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes] = {Board::tetromino_I, Board::tetromino_J, Board::tetromino_L, Board::tetromino_O, Board::tetromino_S, Board::tetromino_T, Board::tetromino_Z};
 
-ofColor possible_colors[Tetromino::num_of_tetrominoes];
-
 std::vector<Tetromino> all_created_tetrominoes;
 
-void Board::InitColors() {
-    possible_colors[0] = ofColor::cyan;
-    possible_colors[1] = ofColor::blue;
-    possible_colors[2] = ofColor::orange;
-    possible_colors[3] = ofColor::yellow;
-    possible_colors[4] = ofColor::green;
-    possible_colors[5] = ofColor::purple;
-    possible_colors[6] = ofColor::red;
-}
 
 void Board::InitBoard() {
     for (int r = 0; r < kStandardHeight; r++) {
@@ -42,16 +31,17 @@ void Board::InitBoard() {
     all_created_tetrominoes;
 }
 
-Tetromino Board::GenerateTetromino(int x_origin, int y_origin, int block_side_length, Tetromino::State t_state) {
-    InitColors();
-    
+
+Tetromino Board::GenerateTetromino(Tetromino::State t_state) {
+    //InitColors();
     int random_index = rand() % Tetromino::num_of_tetrominoes;
     Tetromino chosen_tetromino = possible_tetrominoes[random_index];
-    ofColor chosen_color = possible_colors[random_index];
-    ofSetColor(chosen_color);
-    
+    //ofColor chosen_color = Board::SelectColor(chosen_tetromino);
+    //ofSetColor(chosen_color);
     chosen_tetromino.SetState(t_state);
-    
+    all_created_tetrominoes.push_back(chosen_tetromino);
+    return chosen_tetromino;
+    /*
     int x = x_origin;
     int y = y_origin;
     int r_b = Board::board_x_entry_point;
@@ -71,41 +61,71 @@ Tetromino Board::GenerateTetromino(int x_origin, int y_origin, int block_side_le
         r_b = Board::board_x_entry_point;
         c_b++;
     }
-    all_created_tetrominoes.push_back(chosen_tetromino);
+     */
     
-    return chosen_tetromino;
+}
+
+ofColor Board::SelectColor(Tetromino tetromino) {
+    std::cout << tetromino.letter << std::endl;
+    ofColor color;
+    switch (tetromino.letter) {
+        case 'I':
+            color = ofColor::cyan;
+            break;
+        case 'J':
+            color = ofColor::blue;
+            break;
+        case 'L':
+            color = ofColor::orange;
+            break;
+        case 'O':
+            color = ofColor::yellow;
+            break;
+        case 'S':
+            color = ofColor::green;
+            break;
+        case 'T':
+            color = ofColor::purple;
+            break;
+        case 'Z':
+            color = ofColor::red;
+            break;
+        default:
+            color = ofColor::white;
+            break;
+    }
+    return color;
+}
+
+void Board::DrawToBoard(Tetromino tetromino_to_draw, int x_start, int y_start, int block_side_length) {
+    ofColor color = Board::SelectColor(tetromino_to_draw);
+    ofSetColor(color);
+    
+    int x = x_start;
+    int y = y_start;
+    int r_b = Board::board_x_start;
+    int c_b = 1;
+    int block_count = 0;
+    
+    for (int r_t = 2; r_t < Tetromino::kTetrominoSize; r_t++) {
+        for (int c_t = 1; c_t < Tetromino::kTetrominoSize + 1; c_t++) {
+            if (tetromino_to_draw.shape_and_rotations[0][r_t][c_t]) {
+                board[r_b][c_b] = color;
+                ofDrawRectangle(x_start + (r_b * block_side_length), y_start + (c_b * block_side_length), block_side_length, block_side_length);
+                tetromino_to_draw.block_locations[block_count] = std::make_pair(r_b, c_b);
+                block_count++;
+            }
+            r_b++;
+        }
+        r_b = Board::board_x_start;
+        c_b++;
+    }
 }
 
 void Board::Fall(int x_origin, int y_origin) {
     for (int i = 0; i < all_created_tetrominoes.size(); i++) {
         if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-            ofColor color;
-            switch (all_created_tetrominoes[i].letter) {
-                case 'I':
-                    color = ofColor::cyan;
-                    break;
-                case 'J':
-                    color = ofColor::blue;
-                    break;
-                case 'L':
-                    color = ofColor::orange;
-                    break;
-                case 'O':
-                    color = ofColor::yellow;
-                    break;
-                case 'S':
-                    color = ofColor::green;
-                    break;
-                case 'T':
-                    color = ofColor::purple;
-                    break;
-                case 'Z':
-                    color = ofColor::red;
-                    break;
-                default:
-                    color = ofColor::white;
-                    break;
-            }
+            ofColor color = Board::SelectColor(all_created_tetrominoes[i]);
             
             int x;
             int original_y;
@@ -132,6 +152,7 @@ void Board::Fall(int x_origin, int y_origin) {
             }
         }
     }
+
 }
 
 bool Board::CanRemoveRow(int row) {

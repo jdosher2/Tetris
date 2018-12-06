@@ -21,12 +21,17 @@ public:
         WAITING,
         FALLING
     };
+    
     static const int kTetrominoSize = 4;
     static const int num_of_tetrominoes = 7;
     char letter;
     bool shape_and_rotations[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1] = {};
     State current_state;
     std::pair<int, int> block_locations[kTetrominoSize] = {};
+    
+    Tetromino() {
+        
+    }
     
     Tetromino(char name, const bool shape_array[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1], State state) {
         letter = name;
@@ -57,7 +62,6 @@ public:
 private:
     int x;
     int y;
-    double falling_speed = 0.5;
 };
 
 extern const bool shape_I[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
