@@ -10,25 +10,6 @@ void ofApp::setup(){
     Board::InitBoard();
     ofSetFrameRate(1);
     
-    buffer.allocate(ofGetWindowWidth(), ofGetWindowHeight());
-    buffer.begin();
-    
-    ofApp::DrawNormalBackground();
-    ofApp::DrawText();
-    ofApp::DrawScoreText();
-    
-    
-    Tetromino falling_tetromino = Board::GenerateTetromino(Tetromino::State::FALLING);
-    Board::DrawToBoard(falling_tetromino, x_origin, y_origin, Block::kSideLength);
-    
-    Tetromino waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING);
-    Board::DrawToBoard(waiting_tetromino, preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength);
-    
-    
-    Board::Fall(x_origin, y_origin);
-   // ofApp::DrawGridlines();
-    
-    buffer.end();
 }
 
 //--------------------------------------------------------------
@@ -39,65 +20,18 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     //buffer.draw(0, 0);
-    
     ofApp::DrawNormalBackground();
     ofApp::DrawText();
     ofApp::DrawScoreText();
     
     if (all_created_tetrominoes.size() == 0) {
-        Tetromino falling_tetromino = Board::GenerateTetromino(Tetromino::State::FALLING);
-        Board::DrawToBoard(falling_tetromino, x_origin + 50, y_origin, Block::kSideLength);
+        Board::GenerateTetromino(x_origin, y_origin, Block::kSideLength, Tetromino::State::FALLING);
     }
-    
-    ofApp::DrawGridlines();
-    
-    /*
-    ofApp::DrawNormalBackground();
-    ofApp::DrawText();
-    ofApp::DrawScoreText();
-    
-    Tetromino falling_tetromino;
-    if (all_created_tetrominoes.size() == 0) {
-        //Board::GenerateTetromino(x_origin, y_origin, Block::kSideLength, Tetromino::State::FALLING);
-        falling_tetromino = Board::GenerateTetromino(Tetromino::State::FALLING);
-        Board::DrawToBoard(falling_tetromino, x_origin, y_origin, Block::kSideLength);
-        
-    } else {
-        for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-            if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-                falling_tetromino = all_created_tetrominoes[i];
-            }
-        }
-        Board::DrawToBoard(falling_tetromino, x_origin, y_origin, Block::kSideLength);
-    }
-    
-    
-    //Board::DrawToBoard(falling_tetromino, x_origin, y_origin, Block::kSideLength);
-    //Board::GenerateTetromino(preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength, Tetromino::State::WAITING);
-    
-    int num_of_waiting_tetrominoes = 0;
-    for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-        if (all_created_tetrominoes[i].GetState() == Tetromino::State::WAITING) {
-            num_of_waiting_tetrominoes++;
-        }
-    }
-    Tetromino waiting_tetromino;
-    if (num_of_waiting_tetrominoes == 0) {
-        waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING);
-        Board::DrawToBoard(waiting_tetromino, preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength);
-    }
-    if (num_of_waiting_tetrominoes == 1) {
-        for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-            if (all_created_tetrominoes[i].GetState() == Tetromino::State::WAITING) {
-                waiting_tetromino = all_created_tetrominoes[i];
-            }
-        }
-        Board::DrawToBoard(waiting_tetromino, preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength);
-    }
+    Board::GenerateTetromino(preview_x_origin - Block::kPreviewSideLength, preview_y_origin + (2 * Block::kPreviewSideLength), Block::kPreviewSideLength, Tetromino::State::WAITING);
     
     Board::Fall(x_origin, y_origin);
     ofApp::DrawGridlines();
-     */
+    
 }
 
 //--------------------------------------------------------------

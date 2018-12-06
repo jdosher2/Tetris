@@ -30,16 +30,17 @@ public:
     static Tetromino tetromino_Z;
     
     static void InitBoard();
-    //static void InitColors();
-    static Tetromino GenerateTetromino(Tetromino::State t_state);
     
-    static void DrawToBoard(Tetromino tetromino_to_draw, int x_origin, int y_origin, int block_side_length);
+    //static Tetromino GenerateTetromino(Tetromino::State t_state);
+    static Tetromino GenerateTetromino(int x_origin, int y_origin, int block_side_length, Tetromino::State t_state);
+    
+    //static void DrawToBoard(Tetromino tetromino_to_draw, int x_origin, int y_origin, int block_side_length);
     static void Fall(int x_origin, int y_origin);
     static void CheckBoardForCompletedRow();
     
     
 private:
-    static const int board_x_start = 3;
+    static const int board_x_entry_point = 3;
     
     static ofColor SelectColor(Tetromino tetromino);
     static bool CanFall();
