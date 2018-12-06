@@ -128,7 +128,38 @@ ofColor Board::SelectColor(Tetromino tetromino) {
          }
      }
  }
- 
+
+void Board::MoveActiveTetromino(Tetromino::Direction direction, int x_origin, int y_origin) {
+    for (int i = 0; i < all_created_tetrominoes.size(); i++) {
+        if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
+            ofColor color = Board::SelectColor(all_created_tetrominoes[i]);
+            
+            int original_x;
+            int y;
+            
+            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+                // check original location/color
+                std::pair<int, int> original_block_location = all_created_tetrominoes[i].block_locations[block];
+                original_x = original_block_location.first;
+                y = original_block_location.second;
+                board[original_x][y] = ofColor::black;
+                ofSetColor(ofColor::black);
+                ofDrawRectangle(x_origin + (original_x * Block::kSideLength), y_origin + (y * Block::kSideLength), Block::kSideLength, Block::kSideLength);
+            }
+            
+            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+                // move each block down 1 space by changing fill color
+                std::pair<int, int> original_block_location = all_created_tetrominoes[i].block_locations[block];
+                original_x = original_block_location.first;
+                y = original_block_location.second;
+                all_created_tetrominoes[i].block_locations[block] = std::make_pair(original_x + direction, y);
+                board[original_x + direction][y] = color;
+                ofSetColor(color);
+                ofDrawRectangle(x_origin + ((original_x + direction) * Block::kSideLength), y_origin + ((y) * Block::kSideLength), Block::kSideLength, Block::kSideLength);
+            }
+        }
+    }
+}
 
 bool Board::CanRemoveRow(int row) {
     for (int c = 0; c < kStandardWidth; c++) {

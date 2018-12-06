@@ -114,10 +114,10 @@ void ofApp::keyPressed(int key){
         // rotate
         
     } else if (lower_key == 'a' || key == OF_KEY_LEFT) {
-        // move left
+        Board::MoveActiveTetromino(Tetromino::Direction::LEFT, x_origin, y_origin);
         
     } else if (lower_key == 'd' || key == OF_KEY_RIGHT) {
-        // move right
+        Board::MoveActiveTetromino(Tetromino::Direction::RIGHT, x_origin, y_origin);
         
     } else if (lower_key == 's' || key == OF_KEY_DOWN) {
         // fall faster

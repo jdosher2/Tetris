@@ -22,6 +22,11 @@ public:
         FALLING
     };
     
+    enum Direction {
+        LEFT = -1,
+        RIGHT = 1
+    };
+    
     static const int kTetrominoSize = 4;
     static const int num_of_tetrominoes = 7;
     char letter;
