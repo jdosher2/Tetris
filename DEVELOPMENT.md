@@ -20,3 +20,4 @@
 
 12/6/18
 * restructured tetromino/board representation
+* moving pieces side-to-side now works (but is slow and needs fixing)
