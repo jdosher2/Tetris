@@ -21,3 +21,9 @@
 12/6/18
 * restructured tetromino/board representation
 * moving pieces side-to-side now works (but is slow and needs fixing)
+
+12/8/18
+* completely restructured tetromino/board representation (again)
+* added functions to check if tetromino can continue falling and if it can move to the left or right
+* added basic version of scoring
+* added an endgame condition
