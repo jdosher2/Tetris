@@ -7,6 +7,8 @@
 
 #include "Game.hpp"
 
+Game::GameState Game::current_state = Game::IN_PROGRESS;
+
 int Game::current_level = 1;
 int Game::score = 0;
 bool Game::was_level_set = false;

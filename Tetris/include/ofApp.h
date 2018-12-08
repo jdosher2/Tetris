@@ -6,18 +6,11 @@
 #include "Game.hpp"
 
 class ofApp : public ofBaseApp{
-
-enum GameState {
-        IN_PROGRESS,
-        PAUSED,
-        FINISHED
-};
     
 public:
     std::string default_song;
     ofSoundPlayer game_music;
     
-    ofFbo buffer;
     ofTrueTypeFont game_font;
     
     void setup();
@@ -37,12 +30,6 @@ public:
     void gotMessage(ofMessage msg);
 		
 private:
-    ofTimer timer;
-    
-    GameState current_state = IN_PROGRESS;
-    
-    bool is_tetromino_falling = false;
-    
     const int board_width = Block::kSideLength * Board::kStandardWidth;
     const int board_height = Block::kSideLength * Board::kStandardHeight;
     const int x_origin = 50;

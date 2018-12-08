@@ -176,6 +176,17 @@ void Board::MoveActiveTetromino(Tetromino::Direction direction) {
 }
 
 
+int Board::GetLowestPoint(Tetromino tetromino) {
+    int lowest_row = 0;
+    for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+        if (tetromino.block_locations[block].first > lowest_row) {
+            lowest_row = tetromino.block_locations[block].first;
+        }
+    }
+    return lowest_row;
+}
+
+
 bool Board::CanFall() {
     Tetromino active_tetromino;
     for (int i = 0; i < all_created_tetrominoes.size(); i++) {
@@ -189,9 +200,15 @@ bool Board::CanFall() {
                 Board::num_of_active_tetrominoes--;
                 return false;
             }
+            if (active_tetromino.block_locations[block].first == Board::GetLowestPoint(active_tetromino)) {
+                if (board[active_tetromino.block_locations[block].first + 1][active_tetromino.block_locations[block].second] != ofColor::black) {
+                    all_created_tetrominoes[i].SetState(Tetromino::State::INACTIVE);
+                    Board::num_of_active_tetrominoes--;
+                    return false;
+                }
+            }
         }
     }
-    
     return true;
 }
 
@@ -252,7 +269,8 @@ void Board::CheckBoardForCompletedRow() {
 
 bool Board::IsGameOver() {
     for (int c = 0; c < kStandardWidth; c++) {
-        if (board[0][c] != ofColor::black) {
+        if (board[0][c] != ofColor::black && !Board::CanFall()) {
+            Game::current_state = Game::FINISHED;
             return true;
         }
     }

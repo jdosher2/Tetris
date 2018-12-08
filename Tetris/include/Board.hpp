@@ -39,17 +39,18 @@ public:
     static void FastFall();
     static void MoveActiveTetromino(Tetromino::Direction direction);
     static void CheckBoardForCompletedRow();
+    static bool IsGameOver();
     
     
 private:
     static const int board_x_entry_point = 3;
     
     static ofColor SelectColor(Tetromino tetromino);
+    static int GetLowestPoint(Tetromino tetromino);
     static bool CanFall();
     static bool CanMove(Tetromino::Direction direction);
     static bool CanRemoveRow(int row);
     static void RemoveRow(int row);
-    static bool IsGameOver();
 };
 
 extern std::vector<Tetromino> all_created_tetrominoes;

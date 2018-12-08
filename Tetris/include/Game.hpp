@@ -13,6 +13,13 @@
 class Game {
     
 public:
+    enum GameState {
+        IN_PROGRESS,
+        PAUSED,
+        FINISHED
+    };
+    
+    static GameState current_state;
     static int current_level;
     static int score;
     static int lines_cleared;
@@ -25,5 +32,6 @@ public:
     
     static void UpdateLevel();
 };
+
 
 #endif /* Game_hpp */

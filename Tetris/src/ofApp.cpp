@@ -24,20 +24,23 @@ void ofApp::draw(){
     Tetromino falling_tetromino;
     Tetromino waiting_tetromino;
     
-    if (Board::num_of_active_tetrominoes == 0) {
-        Board::num_of_active_tetrominoes++;
-        Board::GenerateTetromino(Tetromino::State::FALLING, 1, 3);
-        //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING, 2, 2);
-    }
-    
-    Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
-    ofApp::DrawGridlines();
-
-    if (ofGetElapsedTimeMillis() % Game::falling_speed < 20) {
-        Board::Fall();
-        Board::CheckBoardForCompletedRow();
+    if(Game::current_state == Game::IN_PROGRESS) {
+        if (Board::num_of_active_tetrominoes == 0) {
+            Board::num_of_active_tetrominoes++;
+            Board::GenerateTetromino(Tetromino::State::FALLING, 0, 3);
+            //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING, 2, 2);
+        }
+        
         Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
         ofApp::DrawGridlines();
+
+        if (ofGetElapsedTimeMillis() % Game::falling_speed < 20) {
+            Board::IsGameOver();
+            Board::Fall();
+            Board::CheckBoardForCompletedRow();
+            Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+            ofApp::DrawGridlines();
+        }
     }
 }
 
@@ -108,14 +111,14 @@ void ofApp::keyPressed(int key){
     int lower_key = tolower(key);
     
     if (lower_key == 'p') {
-        if (current_state == IN_PROGRESS) {
+        if (Game::current_state == Game::IN_PROGRESS) {
             // pause
-            current_state = PAUSED;
+            Game::current_state = Game::PAUSED;
             game_music.setPaused(true);
             
-        } else if (current_state == PAUSED){
+        } else if (Game::current_state == Game::PAUSED){
             // unpause
-            current_state = IN_PROGRESS;
+            Game::current_state = Game::IN_PROGRESS;
             game_music.setPaused(false);
         }
         
