@@ -26,15 +26,19 @@ void ofApp::draw(){
     Tetromino falling_tetromino;
     Tetromino waiting_tetromino;
     
-    if (all_created_tetrominoes.size() == 0) {
-        falling_tetromino = Board::GenerateTetromino(Tetromino::State::FALLING, 1, 3);
-        //waiting_tetromino = Board::NewGenerateTetromino(Tetromino::State::WAITING, 2, 2);
+    if (Board::num_of_active_tetrominoes == 0) {
+        Board::num_of_active_tetrominoes++;
+        Board::GenerateTetromino(Tetromino::State::FALLING, 1, 3);
+        //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING, 2, 2);
     }
     
     Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
     Board::Fall();
-    //Board::NewDrawBoard(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
+    Board::CheckBoardForCompletedRow();
+    //Board::DrawTetrominoes(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
     ofApp::DrawGridlines();
+    
+    std::cout << Game::falling_speed;
 }
 
 //--------------------------------------------------------------
@@ -121,20 +125,19 @@ void ofApp::keyPressed(int key){
         
     } else if (lower_key == 'd' || key == OF_KEY_RIGHT) {
         Board::MoveActiveTetromino(Tetromino::Direction::RIGHT);
-        Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
         
     } else if (lower_key == 's' || key == OF_KEY_DOWN) {
         // fall faster
         
     } else if (key == ' ') {
-        // fall immediately
+        Board::FastFall();
         
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-
+   
 }
 
 //--------------------------------------------------------------
