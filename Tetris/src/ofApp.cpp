@@ -8,8 +8,6 @@ void ofApp::setup(){
     game_music.play();
     
     Board::InitBoard();
-    ofSetFrameRate(1);
-    
 }
 
 //--------------------------------------------------------------
@@ -33,12 +31,14 @@ void ofApp::draw(){
     }
     
     Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
-    Board::Fall();
-    Board::CheckBoardForCompletedRow();
-    //Board::DrawTetrominoes(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
     ofApp::DrawGridlines();
-    
-    std::cout << Game::falling_speed;
+
+    if (ofGetElapsedTimeMillis() % Game::falling_speed < 20) {
+        Board::Fall();
+        Board::CheckBoardForCompletedRow();
+        Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+        ofApp::DrawGridlines();
+    }
 }
 
 //--------------------------------------------------------------
@@ -88,6 +88,8 @@ void ofApp::DrawText() {
 
 //--------------------------------------------------------------
 void ofApp::DrawScoreText() {
+    Game::UpdateLevel();
+    
     ofSetColor(ofColor::black);
     ofDrawRectangle(placeholder_x_start, y_origin + (3 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // level
     ofDrawRectangle(placeholder_x_start, y_origin + (5 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // score

@@ -16,10 +16,14 @@ public:
     static int current_level;
     static int score;
     static int lines_cleared;
+    static bool was_level_set;
     
-    static double falling_speed;
-    static constexpr double falling_speed_increment = 0.05;
+    static int falling_speed;
+    static const int falling_speed_increment = 50; // 0.05 sec
+    static const int line_score = 100;
     
+    
+    static void UpdateLevel();
 };
 
 #endif /* Game_hpp */

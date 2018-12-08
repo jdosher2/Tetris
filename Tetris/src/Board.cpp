@@ -197,16 +197,13 @@ bool Board::CanFall() {
 
 
 bool Board::CanMove(Tetromino::Direction direction) {
-    Tetromino active_tetromino;
     for (int i = 0; i < all_created_tetrominoes.size(); i++) {
         if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-            active_tetromino = all_created_tetrominoes[i];
-        }
-        
-        for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
-            int c = active_tetromino.block_locations[block].second;
-            if (c + direction < 0 || c + direction > Board::kStandardWidth - 1) {
-                return false;
+            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+                int c = all_created_tetrominoes[i].block_locations[block].second;
+                if (c + direction < 0 || c + direction > Board::kStandardWidth - 1) {
+                    return false;
+                }
             }
         }
     }
@@ -238,6 +235,7 @@ void Board::RemoveRow(int row) {
     }
     
     Game::lines_cleared++;
+    Game::score += Game::line_score;
     Board::CheckBoardForCompletedRow();
 }
 
