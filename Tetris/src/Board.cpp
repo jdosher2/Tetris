@@ -270,6 +270,7 @@ void Board::CheckBoardForCompletedRow() {
 bool Board::IsGameOver() {
     for (int c = 0; c < kStandardWidth; c++) {
         if (board[0][c] != ofColor::black && !Board::CanFall()) {
+            std::cout << "c: " << c << ". color: " << board[0][c] << std::endl;
             Game::current_state = Game::FINISHED;
             return true;
         }
