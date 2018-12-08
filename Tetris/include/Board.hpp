@@ -31,12 +31,16 @@ public:
     
     static void InitBoard();
     
+    static Tetromino NewGenerateTetromino(Tetromino::State state, int row, int column);
+    static void NewDrawBoard(int x_board_start, int y_board_start, int width, int height, int block_side_length);
+    static void NewFall();
+    static void NewMoveActiveTetromino(Tetromino::Direction direction);
+    
     
     static Tetromino GenerateTetromino(int x_origin, int y_origin, int block_side_length, Tetromino::State t_state);
-    //static Tetromino GenerateTetromino(Tetromino::State t_state);
-    //static void DrawToBoard(Tetromino tetromino_to_draw, int x_origin, int y_origin, int block_side_length);
     static void Fall(int x_origin, int y_origin);
-    static void MoveActiveTetromino(Tetromino::Direction direction, int x_origin, int y_origin); 
+    static void MoveActiveTetromino(Tetromino::Direction direction, int x_origin, int y_origin);
+    
     static void CheckBoardForCompletedRow();
     
     
