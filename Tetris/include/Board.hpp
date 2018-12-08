@@ -31,15 +31,10 @@ public:
     
     static void InitBoard();
     
-    static Tetromino NewGenerateTetromino(Tetromino::State state, int row, int column);
-    static void NewDrawBoard(int x_board_start, int y_board_start, int width, int height, int block_side_length);
-    static void NewFall();
-    static void NewMoveActiveTetromino(Tetromino::Direction direction);
-    
-    
-    static Tetromino GenerateTetromino(int x_origin, int y_origin, int block_side_length, Tetromino::State t_state);
-    static void Fall(int x_origin, int y_origin);
-    static void MoveActiveTetromino(Tetromino::Direction direction, int x_origin, int y_origin);
+    static Tetromino GenerateTetromino(Tetromino::State state, int row, int column);
+    static void DrawTetrominoes(int x_board_start, int y_board_start, int width, int height, int block_side_length);
+    static void Fall();
+    static void MoveActiveTetromino(Tetromino::Direction direction);
     
     static void CheckBoardForCompletedRow();
     
@@ -49,6 +44,7 @@ private:
     
     static ofColor SelectColor(Tetromino tetromino);
     static bool CanFall();
+    static bool CanMove(Tetromino::Direction direction);
     static bool CanRemoveRow(int row);
     static void RemoveRow(int row);
     static bool IsGameOver();

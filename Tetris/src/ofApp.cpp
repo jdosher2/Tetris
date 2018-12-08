@@ -27,12 +27,12 @@ void ofApp::draw(){
     Tetromino waiting_tetromino;
     
     if (all_created_tetrominoes.size() == 0) {
-        falling_tetromino = Board::NewGenerateTetromino(Tetromino::State::FALLING, 1, 3);
+        falling_tetromino = Board::GenerateTetromino(Tetromino::State::FALLING, 1, 3);
         //waiting_tetromino = Board::NewGenerateTetromino(Tetromino::State::WAITING, 2, 2);
     }
     
-    Board::NewDrawBoard(x_origin, y_origin, board_width, board_height, Block::kSideLength);
-    Board::NewFall();
+    Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+    Board::Fall();
     //Board::NewDrawBoard(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
     ofApp::DrawGridlines();
 }
@@ -117,11 +117,11 @@ void ofApp::keyPressed(int key){
         // rotate
         
     } else if (lower_key == 'a' || key == OF_KEY_LEFT) {
-        Board::NewMoveActiveTetromino(Tetromino::Direction::LEFT);
+        Board::MoveActiveTetromino(Tetromino::Direction::LEFT);
         
     } else if (lower_key == 'd' || key == OF_KEY_RIGHT) {
-        Board::NewMoveActiveTetromino(Tetromino::Direction::RIGHT);
-        Board::NewDrawBoard(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+        Board::MoveActiveTetromino(Tetromino::Direction::RIGHT);
+        Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
         
     } else if (lower_key == 's' || key == OF_KEY_DOWN) {
         // fall faster
