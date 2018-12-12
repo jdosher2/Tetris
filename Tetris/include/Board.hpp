@@ -37,7 +37,7 @@ public:
     static Tetromino FindActiveTetromino();
     static Tetromino FindWaitingTetromino();
     static void PlaceTetrominoInBoard(Tetromino tetromino, int row, int column);
-    static void DrawTetromino(int x_board_start, int y_board_start, int width, int height, int block_side_length);
+    static void DrawBoard(int x_board_start, int y_board_start, int width, int height, int block_side_length);
     static void DrawWaitingTetromino(int x_board_start, int y_board_start, int width, int height, int block_side_length);
     static void Fall();
     static void FastFall();

@@ -121,7 +121,7 @@ void Board::PlaceTetrominoInBoard(Tetromino tetromino, int row, int column) {
 }
 
 
-void Board::DrawTetromino(int x_board_start, int y_board_start, int width, int height, int block_side_length) {
+void Board::DrawBoard(int x_board_start, int y_board_start, int width, int height, int block_side_length) {
     int r = 0;
     int c = 0;
     for (int x = x_board_start; x < width + block_side_length; x += block_side_length) {
@@ -245,12 +245,12 @@ bool Board::CanFall() {
 bool Board::CanMove(Tetromino::Direction direction) {
     for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
         int c = active_tetromino[0].block_locations[block].second;
-            if (c + direction >= 0 && c + direction <= Board::kStandardWidth - 1) {
-                return true;
+            if (c + direction < 0 || c + direction > Board::kStandardWidth - 1) {
+                return false;
             }
         }
    
-    return false;
+    return true;
 }
 
 

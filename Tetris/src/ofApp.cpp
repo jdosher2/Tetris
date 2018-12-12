@@ -10,7 +10,7 @@ void ofApp::setup(){
     Board::InitBoard();
     Game::current_state = Game::GameState::IN_PROGRESS;
     
-    ofSetFrameRate(4);
+    ofSetFrameRate(3);
 }
 
 //--------------------------------------------------------------
@@ -40,15 +40,16 @@ void ofApp::draw(){
     }
     
     
-    
     if (Game::current_state == Game::GameState::IN_PROGRESS) {
         Board::IsGameOver();
         Board::Fall();
         Board::CheckBoardForCompletedRow();
-        Board::DrawTetromino(x_origin, y_origin, board_width, board_height, Block::kSideLength);
         Board::DrawWaitingTetromino(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
-        ofApp::DrawGridlines();
+        
     }
+    
+    Board::DrawBoard(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+    ofApp::DrawGridlines();
     
     if (Game::current_state == Game::GameState::PAUSED) {
         ofApp::DrawPausedBackground();
