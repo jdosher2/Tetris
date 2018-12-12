@@ -49,17 +49,8 @@ public:
     }
     
     
-    void SetX(int x_pos);
-    void SetY(int y_pos);
     void SetState(State state);
-    
-    int GetX();
-    int GetY();
     State GetState();
-    
-    void Draw();
-    void Move(int direction);  // negative = left, positive = right
-    void Rotate();
     
     
 private:
