@@ -9,162 +9,75 @@
 
 
 // TODO: replace manual entries with rotation algorithm
-
-const bool shape_null[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+const bool shape_null[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
 };
 
-const bool shape_I[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
-    {
+const bool shape_I[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
         {false, false, false, false, false},
         {false, false, false, false, false},
         {false, true, true, true, true},
         {false, false, false, false, false},
         {false, false, false, false, false}
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, false, false, false},
-        {true, true, true, true, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false}
-    },
-    {
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, false, false, false}
-    }
+    
 };
 
-const bool shape_J[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
-    {
+const bool shape_J[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    
         {false, false, false, false, false},
         {false, false, false, false, false},
         {false, true, true, true, false},
         {false, false, false, true, false},
         {false, false, false, false, false},
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, true, true, false, false},
-        {false, false, false, false, false},
-    },
-    {
-        {false, false, false, false, false},
-        {false, true, false, false, false},
-        {false, true, true, true, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false},
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, true, true, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, false, false, false},
-    }
 };
 
-const bool shape_L[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
-    {
+const bool shape_L[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    
         {false, false, false, false, false},
         {false, false, false, false, false},
         {false, true, true, true, false},
         {false, true, false, false, false},
         {false, false, false, false, false}
-    },
-    {
-        {false, false, false, false, false},
-        {false, true, true, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, false, false, false}
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, false, true, false},
-        {false, true, true, true, false},
-        {false, false, false, false, false},
-        {false, false, false, false, false}
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, true, false, false},
-        {false, false, true, false, false},
-        {false, false, true, true, false},
-        {false, false, false, false, false}
-    }
+    
 };
 
-const bool shape_O[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
-    {
+const bool shape_O[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    
         {false, false, false, false, false},
         {false, false, false, false, false},
         {false, false, true, true, false},
         {false, false, true, true, false},
         {false, false, false, false, false}
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, false, false, false},
-        {false, false, true, true, false},
-        {false, false, true, true, false},
-        {false, false, false, false, false}
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, false, false, false},
-        {false, false, true, true, false},
-        {false, false, true, true, false},
-        {false, false, false, false, false}
-    },
-    {
-        {false, false, false, false, false},
-        {false, false, false, false, false},
-        {false, false, true, true, false},
-        {false, false, true, true, false},
-        {false, false, false, false, false}
-    }
+    
 };
 
-const bool shape_S[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
-    {
+const bool shape_S[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    
         {false, false, false, false, false},
         {false, false, false, false, false},
         {false, false, true, true, false},
         {false, true, true, false, false},
         {false, false, false, false, false}
-    }
+    
 };
 
-const bool shape_T[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
-    {
+const bool shape_T[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    
         {false, false, false, false, false},
         {false, false, false, false, false},
         {false, true, true, true, false},
         {false, false, true, false, false},
         {false, false, false, false, false}
-    }
+    
 };
 
-const bool shape_Z[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
-    {
+const bool shape_Z[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1] = {
+    
         {false, false, false, false, false},
         {false, false, false, false, false},
         {false, true, true, false, false},
         {false, false, true, true, false},
         {false, false, false, false, false}
-    }
+    
 };
 
 

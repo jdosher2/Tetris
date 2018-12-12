@@ -8,6 +8,8 @@ void ofApp::setup(){
     game_music.play();
     
     Board::InitBoard();
+    
+    ofSetFrameRate(1);
 }
 
 //--------------------------------------------------------------
@@ -21,25 +23,43 @@ void ofApp::draw(){
     ofApp::DrawText();
     ofApp::DrawScoreText();
     
-    Tetromino falling_tetromino;
-    Tetromino waiting_tetromino;
+    Tetromino falling_tetromino = Board::FindActiveTetromino();
+    //Tetromino waiting_tetromino = Board::FindWaitingTetromino();
     
     if (Board::num_of_active_tetrominoes == 0) {
-        Board::num_of_active_tetrominoes++;
-        Board::GenerateTetromino(Tetromino::State::FALLING, 0, 3);
-        //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING, 2, 2);
+        if (all_created_tetrominoes.size() == 0) {
+            falling_tetromino = Board::GenerateTetromino(Tetromino::State::FALLING);
+            //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING);
+            Board::GenerateTetromino(Tetromino::State::WAITING);
+            waiting_tetrominoes.clear();
+            Board::PlaceTetrominoInBoard(falling_tetromino, 0, 3);
+            Board::num_of_active_tetrominoes++;
+            Board::num_of_waiting_tetrominoes++;
+          
+        } else {
+            //falling_tetromino = waiting_tetromino;
+            falling_tetromino = waiting_tetrominoes.front();
+            Board::PlaceTetrominoInBoard(falling_tetromino, 0, 3);
+            Board::num_of_active_tetrominoes++;
+            Board::num_of_waiting_tetrominoes--;
+            Tetromino waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING);
+        }
     }
-    Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+    
+        //Board::GenerateTetromino(Tetromino::State::FALLING, 0, 3);                 !!!!!!!!!!!! cause of weird end game bug  !!!!!!!
+        //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING, 2, 2);
+    
+    Board::DrawTetromino(x_origin, y_origin, board_width, board_height, Block::kSideLength);
     ofApp::DrawGridlines();
     
     if(Game::current_state == Game::IN_PROGRESS) {
-        if (ofGetElapsedTimeMillis() % Game::falling_speed < 20) {
+      //  if (ofGetElapsedTimeMillis() % Game::falling_speed < 20) {
             Board::IsGameOver();
             Board::Fall();
             Board::CheckBoardForCompletedRow();
-            Board::DrawTetrominoes(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+            Board::DrawTetromino(x_origin, y_origin, board_width, board_height, Block::kSideLength);
             ofApp::DrawGridlines();
-        }
+      //  }
     }
 }
 

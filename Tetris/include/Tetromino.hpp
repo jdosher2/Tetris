@@ -30,7 +30,7 @@ public:
     static const int kTetrominoSize = 4;
     static const int num_of_tetrominoes = 7;
     char letter;
-    bool shape_and_rotations[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1] = {};
+    bool shape[kTetrominoSize + 1][kTetrominoSize + 1] = {};
     State current_state;
     std::pair<int, int> block_locations[kTetrominoSize] = {};
     
@@ -38,16 +38,14 @@ public:
         
     }
     
-    Tetromino(char name, const bool shape_array[kTetrominoSize][kTetrominoSize + 1][kTetrominoSize + 1], State state) {
+    Tetromino(char name, const bool shape_array[kTetrominoSize + 1][kTetrominoSize + 1], State state) {
         letter = name;
-        for (int rot = 0; rot < kTetrominoSize; rot++) {
-            for (int i = 0; i < kTetrominoSize + 1; i++) {
-                for (int j = 0; j < kTetrominoSize + 1; j++) {
-                    shape_and_rotations[rot][i][j] = shape_array[rot][i][j];
-                }
+        for (int i = 0; i < kTetrominoSize + 1; i++) {
+            for (int j = 0; j < kTetrominoSize + 1; j++) {
+                shape[i][j] = shape_array[i][j];
             }
         }
-        current_state = state;
+    current_state = state;
     }
     
     
@@ -69,19 +67,19 @@ private:
     int y;
 };
 
-extern const bool shape_I[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_I[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
-extern const bool shape_J[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_J[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
-extern const bool shape_L[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_L[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
-extern const bool shape_O[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_O[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
-extern const bool shape_S[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_S[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
-extern const bool shape_T[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_T[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
-extern const bool shape_Z[Tetromino::kTetrominoSize][Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
+extern const bool shape_Z[Tetromino::kTetrominoSize + 1][Tetromino::kTetrominoSize + 1];
 
 
 #endif /* Tetromino_hpp */

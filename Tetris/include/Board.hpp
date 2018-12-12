@@ -21,6 +21,7 @@ public:
     static const int kStandardHeight = 20;
     static const int kStandardWidth = 10;
     static int num_of_active_tetrominoes;
+    static int num_of_waiting_tetrominoes;
     
     static Tetromino tetromino_I;
     static Tetromino tetromino_J;
@@ -32,9 +33,12 @@ public:
     
     static void InitBoard();
     
-    static Tetromino GenerateTetromino(Tetromino::State state, int row, int column);
-    static Tetromino GenerateWaitingTetromino(Tetromino::State state, int row, int column);
-    static void DrawTetrominoes(int x_board_start, int y_board_start, int width, int height, int block_side_length);
+    static Tetromino GenerateTetromino(Tetromino::State state);
+    static Tetromino FindActiveTetromino();
+    static Tetromino FindWaitingTetromino();
+    static void PlaceTetrominoInBoard(Tetromino tetromino, int row, int column);
+    static void DrawTetromino(int x_board_start, int y_board_start, int width, int height, int block_side_length);
+    static void DrawWaitingTetromino(int x_board_start, int y_board_start, int width, int height, int block_side_length);
     static void Fall();
     static void FastFall();
     static void MoveActiveTetromino(Tetromino::Direction direction);
@@ -54,6 +58,8 @@ private:
 };
 
 extern std::vector<Tetromino> all_created_tetrominoes;
+extern std::vector<Tetromino> waiting_tetrominoes;
+
 extern ofColor board[Board::kStandardHeight][Board::kStandardWidth];
 extern Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes];
 extern ofColor possible_colors[Tetromino::num_of_tetrominoes];
