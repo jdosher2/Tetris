@@ -14,9 +14,9 @@ class Game {
     
 public:
     enum GameState {
-        IN_PROGRESS,
-        PAUSED,
-        FINISHED
+        IN_PROGRESS = 1,
+        PAUSED = 2,
+        FINISHED = 3
     };
     
     static GameState current_state;

@@ -8,8 +8,9 @@ void ofApp::setup(){
     game_music.play();
     
     Board::InitBoard();
+    Game::current_state = Game::GameState::IN_PROGRESS;
     
-    ofSetFrameRate(1);
+    ofSetFrameRate(4);
 }
 
 //--------------------------------------------------------------
@@ -23,43 +24,34 @@ void ofApp::draw(){
     ofApp::DrawText();
     ofApp::DrawScoreText();
     
-    Tetromino falling_tetromino = Board::FindActiveTetromino();
-    //Tetromino waiting_tetromino = Board::FindWaitingTetromino();
-    
-    if (Board::num_of_active_tetrominoes == 0) {
-        if (all_created_tetrominoes.size() == 0) {
-            falling_tetromino = Board::GenerateTetromino(Tetromino::State::FALLING);
-            //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING);
-            Board::GenerateTetromino(Tetromino::State::WAITING);
-            waiting_tetrominoes.clear();
-            Board::PlaceTetrominoInBoard(falling_tetromino, 0, 3);
-            Board::num_of_active_tetrominoes++;
-            Board::num_of_waiting_tetrominoes++;
-          
+    if (active_tetromino.size() == 0) {
+        if (waiting_tetromino.size() < 1) {
+            active_tetromino.push_back(Board::GenerateTetromino(Tetromino::State::FALLING));
+            waiting_tetromino.push_back(Board::GenerateTetromino(Tetromino::State::WAITING));
+                
         } else {
-            //falling_tetromino = waiting_tetromino;
-            falling_tetromino = waiting_tetrominoes.front();
-            Board::PlaceTetrominoInBoard(falling_tetromino, 0, 3);
-            Board::num_of_active_tetrominoes++;
-            Board::num_of_waiting_tetrominoes--;
-            Tetromino waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING);
+            active_tetromino.clear();
+            active_tetromino.push_back(waiting_tetromino[0]);
+            waiting_tetromino.clear();
+            waiting_tetromino.push_back(Board::GenerateTetromino(Tetromino::State::WAITING));
         }
+            
+        Board::PlaceTetrominoInBoard(active_tetromino[0], 0, 3);
     }
     
-        //Board::GenerateTetromino(Tetromino::State::FALLING, 0, 3);                 !!!!!!!!!!!! cause of weird end game bug  !!!!!!!
-        //waiting_tetromino = Board::GenerateTetromino(Tetromino::State::WAITING, 2, 2);
     
-    Board::DrawTetromino(x_origin, y_origin, board_width, board_height, Block::kSideLength);
-    ofApp::DrawGridlines();
     
-    if(Game::current_state == Game::IN_PROGRESS) {
-      //  if (ofGetElapsedTimeMillis() % Game::falling_speed < 20) {
-            Board::IsGameOver();
-            Board::Fall();
-            Board::CheckBoardForCompletedRow();
-            Board::DrawTetromino(x_origin, y_origin, board_width, board_height, Block::kSideLength);
-            ofApp::DrawGridlines();
-      //  }
+    if (Game::current_state == Game::GameState::IN_PROGRESS) {
+        Board::IsGameOver();
+        Board::Fall();
+        Board::CheckBoardForCompletedRow();
+        Board::DrawTetromino(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+        Board::DrawWaitingTetromino(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
+        ofApp::DrawGridlines();
+    }
+    
+    if (Game::current_state == Game::GameState::PAUSED) {
+        ofApp::DrawPausedBackground();
     }
 }
 
@@ -74,7 +66,8 @@ void ofApp::DrawNormalBackground() {
 
 //--------------------------------------------------------------
 void ofApp::DrawPausedBackground() {
-    
+    ofSetColor(ofColor::black);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
 }
 
 //--------------------------------------------------------------
@@ -140,22 +133,24 @@ void ofApp::keyPressed(int key){
             Game::current_state = Game::IN_PROGRESS;
             game_music.setPaused(false);
         }
-        
-    } else if (lower_key == 'w' || key == OF_KEY_UP) {
-        // rotate
-        
-    } else if (lower_key == 'a' || key == OF_KEY_LEFT) {
-        Board::MoveActiveTetromino(Tetromino::Direction::LEFT);
-        
-    } else if (lower_key == 'd' || key == OF_KEY_RIGHT) {
-        Board::MoveActiveTetromino(Tetromino::Direction::RIGHT);
-        
-    } else if (lower_key == 's' || key == OF_KEY_DOWN) {
-        // fall faster
-        
-    } else if (key == ' ') {
-        Board::FastFall();
-        
+    }
+    
+    if (Game::current_state == Game::GameState::IN_PROGRESS) {
+         if (lower_key == 'w' || key == OF_KEY_UP) {
+            // rotate
+            
+        } else if (lower_key == 'a' || key == OF_KEY_LEFT) {
+            Board::MoveActiveTetromino(Tetromino::Direction::LEFT);
+            
+        } else if (lower_key == 'd' || key == OF_KEY_RIGHT) {
+            Board::MoveActiveTetromino(Tetromino::Direction::RIGHT);
+            
+        } else if (lower_key == 's' || key == OF_KEY_DOWN) {
+            // fall faster
+            
+        } else if (key == ' ') {
+            Board::FastFall();
+        }
     }
 }
 

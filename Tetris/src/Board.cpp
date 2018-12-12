@@ -22,8 +22,8 @@ Tetromino Board::tetromino_Z = *new Tetromino('Z', shape_Z, Tetromino::State::IN
 
 Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes] = {Board::tetromino_I, Board::tetromino_J, Board::tetromino_L, Board::tetromino_O, Board::tetromino_S, Board::tetromino_T, Board::tetromino_Z};
 
-std::vector<Tetromino> all_created_tetrominoes;
-std::vector<Tetromino> waiting_tetrominoes;
+std::vector<Tetromino> active_tetromino;
+std::vector<Tetromino> waiting_tetromino;
 
 
 void Board::InitBoard() {
@@ -32,7 +32,6 @@ void Board::InitBoard() {
             board[r][c] = false;
         }
     }
-    all_created_tetrominoes;
 }
 
 
@@ -73,10 +72,13 @@ Tetromino Board::GenerateTetromino(Tetromino::State state) {
     Tetromino chosen_tetromino = possible_tetrominoes[random_index];
     chosen_tetromino.SetState(state);
     
+    if (state == Tetromino::State::FALLING) {
+        active_tetromino.clear();
+        active_tetromino.push_back(chosen_tetromino);
+    }
     if (state == Tetromino::State::WAITING) {
-        waiting_tetrominoes.clear();
-        waiting_tetrominoes.push_back(chosen_tetromino);
-        std::cout << "added" << std::endl;
+        waiting_tetromino.clear();
+        waiting_tetromino.push_back(chosen_tetromino);
     }
     
     return chosen_tetromino;
@@ -84,24 +86,13 @@ Tetromino Board::GenerateTetromino(Tetromino::State state) {
 
 
 Tetromino Board::FindActiveTetromino() {
-    if (all_created_tetrominoes.size() > 0) {
-        for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-            if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-                return all_created_tetrominoes[i];
-            }
-        }
-    }
     
     return Tetromino();
 }
 
 
 Tetromino Board::FindWaitingTetromino() {
-    if (waiting_tetrominoes.size() > 0) {
-        std::cout << waiting_tetrominoes.front().letter << std::endl;
-        return waiting_tetrominoes.front();
-    }
-    std::cout << "should print at start" << std::endl;
+    
     return Tetromino();
 }
 
@@ -113,7 +104,7 @@ void Board::PlaceTetrominoInBoard(Tetromino tetromino, int row, int column) {
     int c_b = column;
     int block_count = 0;
     for (int r_t = 2; r_t < Tetromino::kTetrominoSize; r_t++) {
-        for (int c_t = 1; c_t < Tetromino::kTetrominoSize; c_t++) {
+        for (int c_t = 1; c_t < Tetromino::kTetrominoSize + 1; c_t++) {
             if (tetromino.shape[r_t][c_t]) {
                 board[r_b][c_b] = chosen_color;
                 tetromino.block_locations[block_count] = std::make_pair(r_b, c_b);
@@ -125,7 +116,8 @@ void Board::PlaceTetrominoInBoard(Tetromino tetromino, int row, int column) {
         c_b = column;
     }
     
-    all_created_tetrominoes.push_back(tetromino);
+    active_tetromino.clear();
+    active_tetromino.push_back(tetromino);
 }
 
 
@@ -145,33 +137,43 @@ void Board::DrawTetromino(int x_board_start, int y_board_start, int width, int h
 
 
 void Board::DrawWaitingTetromino(int x_board_start, int y_board_start, int width, int height, int block_side_length) {
+    ofColor color = Board::SelectColor(waiting_tetromino[0]);
+    ofSetColor(color);
     
+    int x = x_board_start + (2 * block_side_length);
+    int y = y_board_start + (3 * block_side_length);
+    
+    for (int r_t = 2; r_t < Tetromino::kTetrominoSize; r_t++) {
+        for (int c_t = 1; c_t < Tetromino::kTetrominoSize + 1; c_t++) {
+            if (waiting_tetromino[0].shape[r_t][c_t]) {
+                ofDrawRectangle(x, y, block_side_length, block_side_length);
+            }
+            x += block_side_length;
+        }
+        y += block_side_length;
+        x = x_board_start + (2 * block_side_length);
+    }
 }
 
 
 void Board::Fall() {
     if (Board::CanFall()) {
-        Tetromino falling_tetromino;
-        for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-            if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-                falling_tetromino = all_created_tetrominoes[i];
-            }
-            ofColor color = Board::SelectColor(falling_tetromino);
+        Tetromino falling_tetromino = active_tetromino[0];
+        ofColor color = Board::SelectColor(falling_tetromino);
             
-            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
-                // set each block to black fill
-                int r = falling_tetromino.block_locations[block].first;
-                int c = falling_tetromino.block_locations[block].second;
-                board[r][c] = ofColor::black;
-            }
+        for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+            // set each block to black fill
+            int r = falling_tetromino.block_locations[block].first;
+            int c = falling_tetromino.block_locations[block].second;
+            board[r][c] = ofColor::black;
+        }
             
-            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
-                // move each block 1 space down by changing fill color
-                int r = falling_tetromino.block_locations[block].first + 1;
-                int c = falling_tetromino.block_locations[block].second;
-                all_created_tetrominoes[i].block_locations[block] = std::make_pair(r, c);
-                board[r][c] = color;
-            }
+        for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+            // move each block 1 space down by changing fill color
+            int r = falling_tetromino.block_locations[block].first + 1;
+            int c = falling_tetromino.block_locations[block].second;
+            active_tetromino[0].block_locations[block] = std::make_pair(r, c);
+            board[r][c] = color;
         }
     }
 }
@@ -186,27 +188,23 @@ void Board::FastFall() {
 
 void Board::MoveActiveTetromino(Tetromino::Direction direction) {
     if (Board::CanMove(direction)) {
-        Tetromino active_tetromino;
-        for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-            if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-                active_tetromino = all_created_tetrominoes[i];
-            }
-            ofColor color = Board::SelectColor(active_tetromino);
+        Tetromino falling_tetromino = active_tetromino[0];
+      
+        ofColor color = Board::SelectColor(falling_tetromino);
 
-            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
-                // set each block to black fill
-                int r = active_tetromino.block_locations[block].first;
-                int c = active_tetromino.block_locations[block].second;
-                board[r][c] = ofColor::black;
-            }
+        for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+            // set each block to black fill
+            int r = falling_tetromino.block_locations[block].first;
+            int c = falling_tetromino.block_locations[block].second;
+            board[r][c] = ofColor::black;
+        }
             
-            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
-                // move each block over 1 space by changing fill color
-                int r = active_tetromino.block_locations[block].first;
-                int c = active_tetromino.block_locations[block].second + direction;
-                all_created_tetrominoes[i].block_locations[block] = std::make_pair(r, c);
-                board[r][c] = color;
-            }
+        for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+            // move each block over 1 space by changing fill color
+            int r = falling_tetromino.block_locations[block].first;
+            int c = falling_tetromino.block_locations[block].second + direction;
+            active_tetromino[0].block_locations[block] = std::make_pair(r, c);
+            board[r][c] = color;
         }
     }
 }
@@ -224,45 +222,35 @@ int Board::GetLowestPoint(Tetromino tetromino) {
 
 
 bool Board::CanFall() {
-    Tetromino active_tetromino;
-    for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-        if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-            active_tetromino = all_created_tetrominoes[i];
+    for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+        if (active_tetromino[0].block_locations[block].first == Board::kStandardHeight - 1) {
+            active_tetromino[0].SetState(Tetromino::State::INACTIVE);
+            active_tetromino.clear();
+            return false;
         }
-        
-        for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
-            if (active_tetromino.block_locations[block].first == Board::kStandardHeight - 1) {
-                all_created_tetrominoes[i].SetState(Tetromino::State::INACTIVE);
-                Board::num_of_active_tetrominoes--;
+                
+        if (active_tetromino[0].block_locations[block].first == Board::GetLowestPoint(active_tetromino[0])) {
+            if (board[active_tetromino[0].block_locations[block].first + 1][active_tetromino[0].block_locations[block].second] != ofColor::black) {
+                active_tetromino[0].SetState(Tetromino::State::INACTIVE);
+                active_tetromino.clear();
                 return false;
-            }
-            
-            
-            if (active_tetromino.block_locations[block].first == Board::GetLowestPoint(active_tetromino)) {
-                if (board[active_tetromino.block_locations[block].first + 1][active_tetromino.block_locations[block].second] != ofColor::black) {
-                    all_created_tetrominoes[i].SetState(Tetromino::State::INACTIVE);
-                    Board::num_of_active_tetrominoes--;
-                    return false;
-                }
             }
         }
     }
+    
     return true;
 }
 
 
 bool Board::CanMove(Tetromino::Direction direction) {
-    for (int i = 0; i < all_created_tetrominoes.size(); i++) {
-        if (all_created_tetrominoes[i].GetState() == Tetromino::State::FALLING) {
-            for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
-                int c = all_created_tetrominoes[i].block_locations[block].second;
-                if (c + direction < 0 || c + direction > Board::kStandardWidth - 1) {
-                    return false;
-                }
+    for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+        int c = active_tetromino[0].block_locations[block].second;
+            if (c + direction >= 0 && c + direction <= Board::kStandardWidth - 1) {
+                return true;
             }
         }
-    }
-    return true;
+   
+    return false;
 }
 
 
@@ -308,7 +296,7 @@ void Board::CheckBoardForCompletedRow() {
 bool Board::IsGameOver() {
     for (int c = 0; c < kStandardWidth; c++) {
         if (board[0][c] != ofColor::black && !Board::CanFall()) {
-            std::cout << "c: " << c << ". color: " << board[0][c] << '\n' << std::endl;
+            std::cout << "DONE " << "c: " << c << ". color: " << board[0][c] << '\n' << std::endl;
             Game::current_state = Game::FINISHED;
             return true;
         }

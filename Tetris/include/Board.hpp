@@ -57,8 +57,9 @@ private:
     static void RemoveRow(int row);
 };
 
-extern std::vector<Tetromino> all_created_tetrominoes;
-extern std::vector<Tetromino> waiting_tetrominoes;
+//extern std::vector<Tetromino> all_created_tetrominoes;
+extern std::vector<Tetromino> active_tetromino;
+extern std::vector<Tetromino> waiting_tetromino;
 
 extern ofColor board[Board::kStandardHeight][Board::kStandardWidth];
 extern Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes];

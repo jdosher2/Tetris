@@ -17,9 +17,9 @@
 class Tetromino {
 public:
     enum State {
-        INACTIVE,
-        WAITING,
-        FALLING
+        INACTIVE = 0,
+        WAITING = 2,
+        FALLING = 1
     };
     
     enum Direction {
