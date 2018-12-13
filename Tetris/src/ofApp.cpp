@@ -10,7 +10,7 @@ void ofApp::setup(){
     Board::InitBoard();
     Game::current_state = Game::GameState::IN_PROGRESS;
     
-    ofSetFrameRate(1);
+    ofSetFrameRate(2);
 }
 
 //--------------------------------------------------------------
@@ -43,7 +43,6 @@ void ofApp::draw(){
     if (Game::current_state == Game::GameState::IN_PROGRESS) {
         Board::IsGameOver();
         Board::Fall();
-        Board::CheckBoardForCompletedRow();
         Board::DrawWaitingTetromino(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
         
     }

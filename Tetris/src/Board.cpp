@@ -255,13 +255,26 @@ bool Board::CanFall() {
         if (active_tetromino[0].block_locations[block].first == Board::kStandardHeight - 1) {
             active_tetromino[0].SetState(Tetromino::State::INACTIVE);
             active_tetromino.clear();
+            Board::CheckBoardForCompletedRow();
             return false;
         }
-                
-        if (active_tetromino[0].block_locations[block].first == Board::GetLowestPoint(active_tetromino[0])) {
-            if (board[active_tetromino[0].block_locations[block].first + 1][active_tetromino[0].block_locations[block].second] != ofColor::black) {
+    }
+
+    
+    std::vector<std::pair<int, int>> lowest_blocks;
+    
+    for (int block1 = 0; block1 < Tetromino::kTetrominoSize; block1++) {
+        bool can_block_collide = true;
+        for (int block2 = 0; block2 < Tetromino::kTetrominoSize; block2++) {
+            if (active_tetromino[0].block_locations[block1].first < active_tetromino[0].block_locations[block2].first && active_tetromino[0].block_locations[block1].second == active_tetromino[0].block_locations[block2].second) {
+                can_block_collide = false;
+            }
+        }
+        if (can_block_collide) {
+            if (board[active_tetromino[0].block_locations[block1].first + 1][active_tetromino[0].block_locations[block1].second] != ofColor::black) {
                 active_tetromino[0].SetState(Tetromino::State::INACTIVE);
                 active_tetromino.clear();
+                Board::CheckBoardForCompletedRow();
                 return false;
             }
         }
