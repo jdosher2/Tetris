@@ -44,6 +44,11 @@ private:
     const int placeholder_x_start = ((x_origin + board_width + ofGetWindowWidth()) / 2) + 10;
     const int score_text_start = ((x_origin + board_width + ofGetWindowWidth()) / 2) + 20;
     
+    const int paused_x_offset = 150;
+    const int paused_y_offset = 100;
+    const int unpause_text_y_offset = 200;
+    const int exit_text_y_offset = 300;
+    
     const int game_over_x_offset = 140;
     const int game_over_y_offset = 100;
     const int score_text_y_offset = 200;

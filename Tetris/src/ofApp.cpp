@@ -9,7 +9,7 @@ void ofApp::setup(){
     
     Board::InitBoard();
     
-    ofSetFrameRate(2);
+    //ofSetFrameRate(1);
 }
 
 //--------------------------------------------------------------
@@ -19,6 +19,8 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofSetFrameRate(Game::starting_falling_speed + ((Game::current_level - 1) * Game::falling_speed_increment));
+    
     ofApp::DrawNormalBackground();
     ofApp::DrawText();
     ofApp::DrawScoreText();
@@ -85,6 +87,13 @@ void ofApp::DrawGameOverBackground() {
 void ofApp::DrawPausedBackground() {
     ofSetColor(ofColor::black);
     ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    
+    ofSetColor(ofColor::white);
+    game_font.load("azonix.otf", 40);
+    game_font.drawString("paused", paused_x_offset, paused_y_offset);
+    game_font.load("azonix.otf", 22);
+    game_font.drawString("press 'p' to unpause", paused_x_offset, unpause_text_y_offset);
+    game_font.drawString("press 'esc' to exit", paused_x_offset, exit_text_y_offset);
 }
 
 //--------------------------------------------------------------

@@ -94,7 +94,6 @@ Tetromino Board::GenerateTetromino(Tetromino::State state) {
 
 void Board::PlaceTetrominoInBoard(Tetromino tetromino, int row, int column) {
     ofColor chosen_color = Board::SelectColor(tetromino);
-    
     int r_b = row;
     int c_b = column;
     int block_count = 0;
@@ -113,6 +112,7 @@ void Board::PlaceTetrominoInBoard(Tetromino tetromino, int row, int column) {
     
     active_tetromino.clear();
     active_tetromino.push_back(tetromino);
+    Game::num_of_tetrominoes_created++;
 }
 
 
