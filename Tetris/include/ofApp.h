@@ -30,6 +30,8 @@ public:
     void gotMessage(ofMessage msg);
 		
 private:
+    bool is_falling_speed_increased;
+    
     const int board_width = Block::kSideLength * Board::kStandardWidth;
     const int board_height = Block::kSideLength * Board::kStandardHeight;
     const int x_origin = 50;
@@ -53,6 +55,7 @@ private:
     const int game_over_y_offset = 100;
     const int score_text_y_offset = 200;
     const int reset_text_y_offset = 300;
+    const int exit2_text_y_offset = 400;
     
     
     void DrawNormalBackground();

@@ -39,6 +39,7 @@ void Board::InitBoard() {
     Game::score = 0;
     Game::lines_cleared = 0;
     Game::falling_speed = 1000;
+    
 }
 
 
@@ -112,7 +113,6 @@ void Board::PlaceTetrominoInBoard(Tetromino tetromino, int row, int column) {
     
     active_tetromino.clear();
     active_tetromino.push_back(tetromino);
-    Game::num_of_tetrominoes_created++;
 }
 
 

@@ -7,9 +7,8 @@ void ofApp::setup(){
     game_music.setLoop(true);
     game_music.play();
     
+    is_falling_speed_increased = false;
     Board::InitBoard();
-    
-    //ofSetFrameRate(1);
 }
 
 //--------------------------------------------------------------
@@ -19,8 +18,6 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofSetFrameRate(Game::starting_falling_speed + ((Game::current_level - 1) * Game::falling_speed_increment));
-    
     ofApp::DrawNormalBackground();
     ofApp::DrawText();
     ofApp::DrawScoreText();
@@ -39,17 +36,24 @@ void ofApp::draw(){
             
         Board::PlaceTetrominoInBoard(active_tetromino[0], 0, 3);
     }
-    
-    
+        
     if (Game::current_state == Game::GameState::IN_PROGRESS) {
         Board::IsGameOver();
-        Board::Fall();
+        if (is_falling_speed_increased) {
+            Game::falling_speed -= (Game::falling_speed_increment / 3);
+        } else {
+            Game::falling_speed = Game::starting_falling_speed;
+        }
+        
+        if (ofGetElapsedTimeMillis() > Game::time_trigger) {
+            Game::time_trigger = ofGetElapsedTimeMillis() + Game::falling_speed - (Game::current_level * Game::falling_speed_increment);
+            Board::Fall();
+        }
         Board::DrawWaitingTetromino(preview_x_origin, preview_y_origin, preview_board_width, preview_board_height, Block::kPreviewSideLength);
         
+        Board::DrawBoard(x_origin, y_origin, board_width, board_height, Block::kSideLength);
+        ofApp::DrawGridlines();
     }
-    
-    Board::DrawBoard(x_origin, y_origin, board_width, board_height, Block::kSideLength);
-    ofApp::DrawGridlines();
     
     if (Game::current_state == Game::GameState::PAUSED) {
         ofApp::DrawPausedBackground();
@@ -80,6 +84,7 @@ void ofApp::DrawGameOverBackground() {
     game_font.load("azonix.otf", 22);
     game_font.drawString("your score: " + std::to_string(Game::score), game_over_x_offset, score_text_y_offset);
     game_font.drawString("press 'r' to play again", game_over_x_offset, reset_text_y_offset);
+    game_font.drawString("press 'esc' to exit", game_over_x_offset, exit2_text_y_offset);
 }
 
 
@@ -127,10 +132,11 @@ void ofApp::DrawText() {
     game_font.drawString("next", label_x_start, y_origin + (10 * Block::kSideLength) - 10);
     
     game_font.load("azonix.otf", 13);
-    game_font.drawString("pause - 'p'", label_x_start, y_origin + (17.5 * Block::kSideLength));
-    game_font.drawString("rotate - up / 'w'", label_x_start, y_origin + (18.5 * Block::kSideLength));
-    game_font.drawString("move - right / 'd'", label_x_start, y_origin + (19 * Block::kSideLength));
-    game_font.drawString("move - left / 'a'", label_x_start, y_origin + (19.5 * Block::kSideLength));
+    game_font.drawString("pause - 'p'", label_x_start, y_origin + (17 * Block::kSideLength));
+    game_font.drawString("rotate - up / 'w'", label_x_start, y_origin + (18 * Block::kSideLength));
+    game_font.drawString("move - right / 'd'", label_x_start, y_origin + (18.5 * Block::kSideLength));
+    game_font.drawString("move - left / 'a'", label_x_start, y_origin + (19 * Block::kSideLength));
+    game_font.drawString("speed up - down / 's'", label_x_start, y_origin + (19.5 * Block::kSideLength));
     game_font.drawString("fall - space", label_x_start, y_origin + (20 * Block::kSideLength));
 }
 
@@ -179,7 +185,7 @@ void ofApp::keyPressed(int key){
             Board::MoveActiveTetromino(Tetromino::Direction::RIGHT);
             
         } else if (lower_key == 's' || key == OF_KEY_DOWN) {
-            // fall faster
+            is_falling_speed_increased = true;
             
         } else if (key == ' ') {
             Board::FastFall();
@@ -195,7 +201,9 @@ void ofApp::keyPressed(int key){
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-   
+    if (tolower(key) == 's' || tolower(key) == OF_KEY_DOWN) {
+        is_falling_speed_increased = false;
+    }
 }
 
 //--------------------------------------------------------------
