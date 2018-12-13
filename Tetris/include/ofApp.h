@@ -38,7 +38,7 @@ private:
     const int preview_board_width = 210;
     const int preview_board_height = 210;
     const int preview_x_origin = (((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100);
-    const int preview_y_origin = y_origin + (12 * Block::kSideLength);
+    const int preview_y_origin = y_origin + (10 * Block::kSideLength);
     
     const int label_x_start = ((x_origin + board_width + ofGetWindowWidth()) / 2)  - 100;
     const int placeholder_x_start = ((x_origin + board_width + ofGetWindowWidth()) / 2) + 10;

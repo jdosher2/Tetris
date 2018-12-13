@@ -124,7 +124,14 @@ void ofApp::DrawText() {
     game_font.drawString("level", label_x_start, y_origin + (3 * Block::kSideLength));
     game_font.drawString("score", label_x_start, y_origin + (5 * Block::kSideLength));
     game_font.drawString("lines", label_x_start, y_origin + (7 * Block::kSideLength));
-    game_font.drawString("next", label_x_start, y_origin + (12 * Block::kSideLength) - 10);
+    game_font.drawString("next", label_x_start, y_origin + (10 * Block::kSideLength) - 10);
+    
+    game_font.load("azonix.otf", 13);
+    game_font.drawString("pause - 'p'", label_x_start, y_origin + (17.5 * Block::kSideLength));
+    game_font.drawString("rotate - up / 'w'", label_x_start, y_origin + (18.5 * Block::kSideLength));
+    game_font.drawString("move - right / 'd'", label_x_start, y_origin + (19 * Block::kSideLength));
+    game_font.drawString("move - left / 'a'", label_x_start, y_origin + (19.5 * Block::kSideLength));
+    game_font.drawString("fall - space", label_x_start, y_origin + (20 * Block::kSideLength));
 }
 
 //--------------------------------------------------------------
@@ -135,7 +142,7 @@ void ofApp::DrawScoreText() {
     ofDrawRectangle(placeholder_x_start, y_origin + (3 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // level
     ofDrawRectangle(placeholder_x_start, y_origin + (5 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // score
     ofDrawRectangle(placeholder_x_start, y_origin + (7 * Block::kSideLength) + 5, 100, - Block::kSideLength * 0.9 - 5);    // lines
-    ofDrawRectangle(label_x_start, y_origin + (12 * Block::kSideLength), 210, 210); // next box
+    ofDrawRectangle(label_x_start, preview_y_origin, 210, 210); // next box
     
     ofSetColor(ofColor::white);
     game_font.load("azonix.otf", 22);
