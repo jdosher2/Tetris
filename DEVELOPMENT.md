@@ -34,10 +34,10 @@
 12/12/18
 * added ability to rotate tetrominoes
 * fixed bug where not all tetromino blocks checked for collision when falling
+* added (moving) collision detection with other tetrominoes
 
 
 STILL NEEDED (AS OF 12/8)
-- [ ] disable moving left/right if other tetromino is blocking it
 - [ ] add pause screen
 - [ ] add game over screen
 - [ ] add leaderboard (code mostly there; mainly needs graphic implementation)
