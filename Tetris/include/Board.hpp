@@ -42,6 +42,7 @@ public:
     static void Fall();
     static void FastFall();
     static void MoveActiveTetromino(Tetromino::Direction direction);
+    static void RotateActiveTetromino();
     static void CheckBoardForCompletedRow();
     static bool IsGameOver();
     

@@ -103,8 +103,8 @@ void Board::PlaceTetrominoInBoard(Tetromino tetromino, int row, int column) {
     int r_b = row;
     int c_b = column;
     int block_count = 0;
-    for (int r_t = 2; r_t < Tetromino::kTetrominoSize; r_t++) {
-        for (int c_t = 1; c_t < Tetromino::kTetrominoSize + 1; c_t++) {
+    for (int r_t = 0; r_t < Tetromino::kStartingHeight; r_t++) {
+        for (int c_t = 0; c_t < Tetromino::kStartingWidth; c_t++) {
             if (tetromino.shape[r_t][c_t]) {
                 board[r_b][c_b] = chosen_color;
                 tetromino.block_locations[block_count] = std::make_pair(r_b, c_b);
@@ -143,8 +143,8 @@ void Board::DrawWaitingTetromino(int x_board_start, int y_board_start, int width
     int x = x_board_start + (2 * block_side_length);
     int y = y_board_start + (3 * block_side_length);
     
-    for (int r_t = 2; r_t < Tetromino::kTetrominoSize; r_t++) {
-        for (int c_t = 1; c_t < Tetromino::kTetrominoSize + 1; c_t++) {
+    for (int r_t = 0; r_t < Tetromino::kStartingHeight; r_t++) {
+        for (int c_t = 0; c_t < Tetromino::kStartingWidth; c_t++) {
             if (waiting_tetromino[0].shape[r_t][c_t]) {
                 ofDrawRectangle(x, y, block_side_length, block_side_length);
             }
@@ -207,6 +207,35 @@ void Board::MoveActiveTetromino(Tetromino::Direction direction) {
             board[r][c] = color;
         }
     }
+}
+
+
+void Board::RotateActiveTetromino() {
+    Tetromino falling_tetromino = active_tetromino[0];
+    ofColor color = Board::SelectColor(falling_tetromino);
+    
+    int pivot_block_r = falling_tetromino.block_locations[1].first;
+    int pivot_block_c = falling_tetromino.block_locations[1].second;
+    int r_increment;
+    int c_increment;
+    
+    for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+        // set each block to black fill
+        int r = falling_tetromino.block_locations[block].first;
+        int c = falling_tetromino.block_locations[block].second;
+        board[r][c] = ofColor::black;
+    }
+    
+    for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+        // find new block locations
+        r_increment = pivot_block_c - falling_tetromino.block_locations[block].second;
+        c_increment = pivot_block_r - falling_tetromino.block_locations[block].first;
+        int r = pivot_block_r - r_increment;
+        int c = pivot_block_c + c_increment;
+        active_tetromino[0].block_locations[block] = std::make_pair(r, c);
+        board[r][c] = color;
+    }
+    
 }
 
 

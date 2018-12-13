@@ -10,7 +10,7 @@ void ofApp::setup(){
     Board::InitBoard();
     Game::current_state = Game::GameState::IN_PROGRESS;
     
-    ofSetFrameRate(3);
+    ofSetFrameRate(1);
 }
 
 //--------------------------------------------------------------
@@ -138,7 +138,7 @@ void ofApp::keyPressed(int key){
     
     if (Game::current_state == Game::GameState::IN_PROGRESS) {
          if (lower_key == 'w' || key == OF_KEY_UP) {
-            // rotate
+             Board::RotateActiveTetromino();
             
         } else if (lower_key == 'a' || key == OF_KEY_LEFT) {
             Board::MoveActiveTetromino(Tetromino::Direction::LEFT);
