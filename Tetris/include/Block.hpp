@@ -18,14 +18,6 @@ class Block {
 public:
     static const int kSideLength = 35;
     static const int kPreviewSideLength = 30;
-    
-    bool is_filled;
-    ofColor fill_color;
-   
-    Block(bool filled, ofColor color) {
-        is_filled = filled;
-        fill_color = color;
-    }
 };
 
 #endif /* Block_hpp */
