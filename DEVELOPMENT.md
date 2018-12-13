@@ -28,11 +28,17 @@
 * added basic version of scoring
 * added an endgame condition
 
+12/10/18
+* largely rewrote generation/placing functions
+
+12/12/18
+* added ability to rotate tetrominoes
+* fixed bug where not all tetromino blocks checked for collision when falling
+
 
 STILL NEEDED (AS OF 12/8)
 - [ ] disable moving left/right if other tetromino is blocking it
-- [ ] fix falling bug (currently only lowermost tetromino blocks can detect collision) 
 - [ ] add pause screen
 - [ ] add game over screen
 - [ ] add leaderboard (code mostly there; mainly needs graphic implementation)
-- [ ] tetromino rotation
+
