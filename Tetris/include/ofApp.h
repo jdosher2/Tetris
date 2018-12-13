@@ -44,9 +44,15 @@ private:
     const int placeholder_x_start = ((x_origin + board_width + ofGetWindowWidth()) / 2) + 10;
     const int score_text_start = ((x_origin + board_width + ofGetWindowWidth()) / 2) + 20;
     
+    const int game_over_x_offset = 140;
+    const int game_over_y_offset = 100;
+    const int score_text_y_offset = 200;
+    const int reset_text_y_offset = 300;
+    
     
     void DrawNormalBackground();
     void DrawPausedBackground();
+    void DrawGameOverBackground();
     void DrawGridlines();
     void DrawText();
     void DrawScoreText();

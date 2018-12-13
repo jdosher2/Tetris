@@ -8,7 +8,6 @@ void ofApp::setup(){
     game_music.play();
     
     Board::InitBoard();
-    Game::current_state = Game::GameState::IN_PROGRESS;
     
     ofSetFrameRate(2);
 }
@@ -53,6 +52,10 @@ void ofApp::draw(){
     if (Game::current_state == Game::GameState::PAUSED) {
         ofApp::DrawPausedBackground();
     }
+    
+    if (Game::current_state == Game::GameState::FINISHED) {
+        ofApp::DrawGameOverBackground();
+    }
 }
 
 //--------------------------------------------------------------
@@ -63,6 +66,20 @@ void ofApp::DrawNormalBackground() {
     ofSetColor(ofColor::black);
     ofDrawRectangle(x_origin, y_origin, board_width, board_height);
 }
+
+//--------------------------------------------------------------
+void ofApp::DrawGameOverBackground() {
+    ofSetColor(ofColor::black);
+    ofDrawRectangle(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+    
+    ofSetColor(ofColor::white);
+    game_font.load("azonix.otf", 40);
+    game_font.drawString("game over", game_over_x_offset, game_over_y_offset);
+    game_font.load("azonix.otf", 22);
+    game_font.drawString("your score: " + std::to_string(Game::score), game_over_x_offset, score_text_y_offset);
+    game_font.drawString("press 'r' to play again", game_over_x_offset, reset_text_y_offset);
+}
+
 
 //--------------------------------------------------------------
 void ofApp::DrawPausedBackground() {
@@ -150,6 +167,12 @@ void ofApp::keyPressed(int key){
             
         } else if (key == ' ') {
             Board::FastFall();
+        }
+    }
+    
+    if (Game::current_state == Game::GameState::FINISHED) {
+        if (lower_key == 'r') {
+            Board::InitBoard();
         }
     }
 }

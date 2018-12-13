@@ -32,7 +32,15 @@ void Board::InitBoard() {
             board[r][c] = false;
         }
     }
+    active_tetromino.clear();
+    waiting_tetromino.clear();
+    Game::current_state = Game::GameState::IN_PROGRESS;
+    Game::current_level = 1;
+    Game::score = 0;
+    Game::lines_cleared = 0;
+    Game::falling_speed = 1000;
 }
+
 
 ofColor Board::SelectColor(Tetromino tetromino) {
     ofColor color;
