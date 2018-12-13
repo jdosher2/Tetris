@@ -37,7 +37,4 @@
 * added (moving) collision detection with other tetrominoes
 * added basic-looking pause screen
 * added basic-looking game over screen
-
-STILL NEEDED (AS OF 12/8)
-- [ ] add leaderboard (code mostly there; mainly needs graphic implementation)
-
+* added speed up function and increased gravity after certain score thresholds
