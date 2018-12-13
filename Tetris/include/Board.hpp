@@ -32,10 +32,7 @@ public:
     static Tetromino tetromino_Z;
     
     static void InitBoard();
-    
     static Tetromino GenerateTetromino(Tetromino::State state);
-    static Tetromino FindActiveTetromino();
-    static Tetromino FindWaitingTetromino();
     static void PlaceTetrominoInBoard(Tetromino tetromino, int row, int column);
     static void DrawBoard(int x_board_start, int y_board_start, int width, int height, int block_side_length);
     static void DrawWaitingTetromino(int x_board_start, int y_board_start, int width, int height, int block_side_length);
@@ -48,22 +45,20 @@ public:
     
     
 private:
-    static const int board_x_entry_point = 3;
-    
     static ofColor SelectColor(Tetromino tetromino);
     static int GetLowestPoint(Tetromino tetromino);
     static bool CanFall();
     static bool CanMove(Tetromino::Direction direction);
+    static bool CanRotate();
     static bool CanRemoveRow(int row);
     static void RemoveRow(int row);
 };
 
-//extern std::vector<Tetromino> all_created_tetrominoes;
 extern std::vector<Tetromino> active_tetromino;
 extern std::vector<Tetromino> waiting_tetromino;
 
 extern ofColor board[Board::kStandardHeight][Board::kStandardWidth];
 extern Tetromino possible_tetrominoes[Tetromino::num_of_tetrominoes];
-extern ofColor possible_colors[Tetromino::num_of_tetrominoes];
+
 
 #endif /* Board_hpp */
