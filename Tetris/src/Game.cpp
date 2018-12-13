@@ -21,7 +21,7 @@ int Game::num_of_tetrominoes_created = 0;
 
 void Game::UpdateLevel() {
     if (score != 0) {
-        if (Game::score % 400 == 0) {
+        if (Game::score % 500 == 0) {
             if (!Game::was_level_set) {
                 Game::current_level++;
                 Game::was_level_set = true;
