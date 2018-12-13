@@ -64,7 +64,6 @@
 		E3663A2321B8570100D07936 /* azonix.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = azonix.otf; path = bin/data/azonix.otf; sourceTree = SOURCE_ROOT; };
 		E3D30856219D9AB600FC3A58 /* catch.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = catch.hpp; sourceTree = "<group>"; };
 		E3D30859219D9B8E00FC3A58 /* saved_scores */ = {isa = PBXFileReference; lastKnownFileType = text; path = saved_scores; sourceTree = "<group>"; };
-		E3D3085A219D9B9C00FC3A58 /* saved_players */ = {isa = PBXFileReference; lastKnownFileType = text; path = saved_players; sourceTree = "<group>"; };
 		E3D3085B219D9FD800FC3A58 /* Tetromino.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Tetromino.cpp; sourceTree = "<group>"; };
 		E3D3085C219D9FD800FC3A58 /* Tetromino.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Tetromino.hpp; sourceTree = "<group>"; };
 		E3D3085E219DA02300FC3A58 /* Board.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
@@ -360,7 +359,6 @@
 		E3D30858219D9B7B00FC3A58 /* build */ = {
 			isa = PBXGroup;
 			children = (
-				E3D3085A219D9B9C00FC3A58 /* saved_players */,
 				E3D30859219D9B8E00FC3A58 /* saved_scores */,
 			);
 			path = build;
