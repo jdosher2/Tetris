@@ -259,9 +259,6 @@ bool Board::CanFall() {
             return false;
         }
     }
-
-    
-    std::vector<std::pair<int, int>> lowest_blocks;
     
     for (int block1 = 0; block1 < Tetromino::kTetrominoSize; block1++) {
         bool can_block_collide = true;
@@ -286,12 +283,37 @@ bool Board::CanFall() {
 
 bool Board::CanMove(Tetromino::Direction direction) {
     for (int block = 0; block < Tetromino::kTetrominoSize; block++) {
+        bool can_block_collide = true;
+        
         int c = active_tetromino[0].block_locations[block].second;
-            if (c + direction < 0 || c + direction > Board::kStandardWidth - 1) {
+        if (direction == -1) {
+            if (c + direction < 0) {
+                return false;
+            }
+            for (int block2 = 0; block2 < Tetromino::kTetrominoSize; block2++) {
+                if (active_tetromino[0].block_locations[block].first == active_tetromino[0].block_locations[block2].first && active_tetromino[0].block_locations[block].second > active_tetromino[0].block_locations[block2].second) {
+                    can_block_collide = false;
+                }
+            }
+                
+        } else if (direction == 1) {
+            if (c + direction > Board::kStandardWidth - 1) {
+                return false;
+            }
+            for (int block2 = 0; block2 < Tetromino::kTetrominoSize; block2++) {
+                if (active_tetromino[0].block_locations[block].first == active_tetromino[0].block_locations[block2].first && active_tetromino[0].block_locations[block].second < active_tetromino[0].block_locations[block2].second) {
+                    can_block_collide = false;
+                }
+            }
+        }
+            
+        if (can_block_collide) {
+            if (board[active_tetromino[0].block_locations[block].first][active_tetromino[0].block_locations[block].second + direction] != ofColor::black) {
                 return false;
             }
         }
-   
+    }
+    
     return true;
 }
 
