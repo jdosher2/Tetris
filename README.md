@@ -1,6 +1,3 @@
-# finalproject-jdosher2
-finalproject-jdosher2 created by GitHub Classroom
-
 <h2> A simple Tetris game made with OpenFrameworks </h2>
 
 <h3> Setup </h3>
