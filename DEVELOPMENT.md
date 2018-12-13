@@ -32,7 +32,7 @@
 * largely rewrote generation/placing functions
 
 12/12/18
-* added ability to rotate tetrominoes
+* fully implemented rotating tetrominoes
 * fixed bug where not all tetromino blocks checked for collision when falling
 * added (moving) collision detection with other tetrominoes
 
