@@ -35,10 +35,9 @@
 * fully implemented rotating tetrominoes
 * fixed bug where not all tetromino blocks checked for collision when falling
 * added (moving) collision detection with other tetrominoes
-
+* added basic-looking pause screen
+* added basic-looking game over screen
 
 STILL NEEDED (AS OF 12/8)
-- [ ] add pause screen
-- [ ] add game over screen
 - [ ] add leaderboard (code mostly there; mainly needs graphic implementation)
 
