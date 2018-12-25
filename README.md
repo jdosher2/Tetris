@@ -1,5 +1,5 @@
 # Tetris
-A simple Tetris game made with openFrameworks 
+A simple Tetris clone made with openFrameworks 
 
 # Setup 
 * Uses: Xcode 9.4.1 and openFrameworks 0.10.1
